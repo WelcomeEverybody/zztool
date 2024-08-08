@@ -15,7 +15,7 @@ export default defineConfig({
       name: 'ZZTOOL',
       formats: ["es", "umd", "cjs"],
       // the proper extensions will be added
-      fileName: 'zzcpt',
+      fileName: 'zztool',
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
