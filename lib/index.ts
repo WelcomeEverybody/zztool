@@ -1,14 +1,14 @@
 /**
  * ZZTOOL工具类
- * version: 1.0.0
+ * version: 1.0.1
  */
 class ZZTOOL {
   static instance:any = null;
   version:string;
   v:string;
   constructor() {
-    this.version = '1.0.0';
-    this.v = '1.0.0'; 
+    this.version = '1.0.1';
+    this.v = '1.0.1'; 
     if(ZZTOOL.instance){
       return ZZTOOL.instance;
     }
@@ -23,6 +23,25 @@ class ZZTOOL {
   error(msg:string){
     throw new Error(msg);
   }
+  // 防抖
+  debounce = (() => {
+    let timer:any = null
+    return (callback:Function, wait = 800) => {
+      timer&&clearTimeout(timer)
+      timer = setTimeout(callback, wait)
+    }
+  })()
+  // 节流
+  throttle = (() => {
+    let last = 0
+    return (callback:Function, wait = 800) => {
+      let now = +new Date()
+      if (now - last > wait) {
+        callback()
+        last = now
+      }
+    }
+  })()
   /**
    * 类型检测
    */
@@ -81,6 +100,52 @@ class ZZTOOL {
   regIsHas(str:string,char:string) {
     return new RegExp(char).test(str);
   }
+  regEmail(str:string) {
+    return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str);
+  }
+  regMobile(str:string) {
+    return /^1[3456789]\d{9}$/.test(str);
+  }
+  regIdcard(str:string){
+    if (!/^\d{17}(\d|X)$/i.test(str)) {
+        return false;
+    }
+    const provinceCodes:any = {
+        11: "北京", 12: "天津", 13: "河北", 14: "山西", 15: "内蒙古",
+        21: "辽宁", 22: "吉林", 23: "黑龙江",
+        31: "上海", 32: "江苏", 33: "浙江", 34: "安徽", 35: "福建", 36: "江西", 37: "山东",
+        41: "河南", 42: "湖北", 43: "湖南", 44: "广东", 45: "广西", 46: "海南",
+        50: "重庆", 51: "四川", 52: "贵州", 53: "云南", 54: "西藏",
+        61: "陕西", 62: "甘肃", 63: "青海", 64: "宁夏", 65: "新疆",
+        71: "台湾", 81: "香港", 82: "澳门", 91: "国外"
+    };
+    if (!provinceCodes[str.substring(0, 2)]) {
+        return false;
+    }
+    const birthday = str.substring(6, 8);
+    const year = birthday.substring(0, 4);
+    const month = birthday.substring(4, 2);
+    const day = birthday.substring(6, 2);
+    const birthDate = new Date(year + '/' + month + '/' + day);
+    if (birthDate.getFullYear() !== parseInt(year) ||
+        (birthDate.getMonth() + 1) !== parseInt(month) ||
+        birthDate.getDate() !== parseInt(day)) {
+        return false;
+    }
+    const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    const checkCodes = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+    let sum = 0;
+    for (let i = 0; i < 17; i++) {
+        sum += this.toNumber(str[i]) * weights[i];
+    }
+    const calculatedCheckCode = checkCodes[sum % 11];
+    if (str[17].toUpperCase() !== calculatedCheckCode) {
+        return false;
+    }
+
+    return true;
+  }
+
   /**
    * 字符串操作
    */
@@ -175,7 +240,7 @@ class ZZTOOL {
     return `rgb(${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 255)})`;
   }
   getRandomRGBA(){
-    return `rgba(${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 1)})`;
+    return `rgba(${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 100) / 100})`;
   }
   /**
    * 数据对比
@@ -273,6 +338,43 @@ class ZZTOOL {
     this.error("Unsupported data type");
   
   }
+    /**
+     * 转树形结构
+     * @param {*} data 
+     * @param {*} pid   父级id
+     */
+    toTree(data:any[], pid:string){
+      let tree:any[] = [];
+      let lookup:any = {};
+    
+      data.forEach(item => {
+        lookup[item.id] = { ...item, children: [] };
+      });
+      data.forEach(item => {
+        if (item[pid] === null) {
+          tree.push(lookup[item.id]);
+        } else {
+          lookup[item[pid]].children.push(lookup[item.id]);
+        }
+      });
+      return tree;
+    }
+    /**
+     * 数据分组
+     * @param {*} data 
+     * @param {*} key
+     */
+    groupBy(data:any[], key:string){
+      return data.reduce((result:any, item:any) => {
+        const groupKey = item[key];
+        if (!result[groupKey]) {
+          result[groupKey] = [];
+        }
+        result[groupKey].push(item);
+        return result;
+      }, {});
+    }
+
 }
 
 export default ZZTOOL;

@@ -12,7 +12,7 @@ export default defineConfig({
     minify: true,
     lib: {
       entry: resolve(__dirname, 'lib/index.ts'),
-      name: 'ZZTOOL',
+      name: 'zztool',
       formats: ["es", "umd", "cjs"],
       // the proper extensions will be added
       fileName: 'zztool',

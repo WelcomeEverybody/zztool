@@ -1,7 +1,7 @@
 {
-  "name": "zztool",
-  "private": true,
-  "version": "1.0.0",
+  "name": "@zzcpt/zztool",
+  "private": false,
+  "version": "1.0.1",
   "type": "module",
   "main": "./lib/index.js",
   "module": "./dist/zztool.umd.cjs",
