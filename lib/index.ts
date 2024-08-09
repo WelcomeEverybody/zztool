@@ -338,43 +338,42 @@ class ZZTOOL {
     this.error("Unsupported data type");
   
   }
-    /**
-     * 转树形结构
-     * @param {*} data 
-     * @param {*} pid   父级id
-     */
-    toTree(data:any[], pid:string){
-      let tree:any[] = [];
-      let lookup:any = {};
-    
-      data.forEach(item => {
-        lookup[item.id] = { ...item, children: [] };
-      });
-      data.forEach(item => {
-        if (item[pid] === null) {
-          tree.push(lookup[item.id]);
-        } else {
-          lookup[item[pid]].children.push(lookup[item.id]);
-        }
-      });
-      return tree;
-    }
-    /**
-     * 数据分组
-     * @param {*} data 
-     * @param {*} key
-     */
-    groupBy(data:any[], key:string){
-      return data.reduce((result:any, item:any) => {
-        const groupKey = item[key];
-        if (!result[groupKey]) {
-          result[groupKey] = [];
-        }
-        result[groupKey].push(item);
-        return result;
-      }, {});
-    }
-
+  /**
+   * 转树形结构
+   * @param {*} data 
+   * @param {*} pid   父级id
+   */
+  toTree(data:any[], pid:string){
+    let tree:any[] = [];
+    let lookup:any = {};
+  
+    data.forEach(item => {
+      lookup[item.id] = { ...item, children: [] };
+    });
+    data.forEach(item => {
+      if (item[pid] === null) {
+        tree.push(lookup[item.id]);
+      } else {
+        lookup[item[pid]].children.push(lookup[item.id]);
+      }
+    });
+    return tree;
+  }
+  /**
+   * 数据分组
+   * @param {*} data 
+   * @param {*} key
+   */
+  groupBy(data:any[], key:string){
+    return data.reduce((result:any, item:any) => {
+      const groupKey = item[key];
+      if (!result[groupKey]) {
+        result[groupKey] = [];
+      }
+      result[groupKey].push(item);
+      return result;
+    }, {});
+  }
 }
 
 export default ZZTOOL;
