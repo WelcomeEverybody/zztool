@@ -103,7 +103,7 @@ class ZZTOOL {
   regEmail(str:string) {
     return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str);
   }
-  regMobile(str:string) {
+  regPhone(str:string) {
     return /^1[3456789]\d{9}$/.test(str);
   }
   regIdcard(str:string){
