@@ -1,14 +1,14 @@
 /**
  * ZZTOOL工具类
- * version: 1.0.1
+ * version: 1.0.3
  */
 class ZZTOOL {
   static instance:any = null;
   version:string;
   v:string;
   constructor() {
-    this.version = '1.0.1';
-    this.v = '1.0.1'; 
+    this.version = '1.0.3';
+    this.v = '1.0.3'; 
     if(ZZTOOL.instance){
       return ZZTOOL.instance;
     }
