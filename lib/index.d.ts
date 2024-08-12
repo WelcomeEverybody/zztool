@@ -117,6 +117,24 @@ declare class ZZTOOL {
      */
     dataUnEmpty(data: any[]): any[];
     /**
+     * 根据str分割后的数组 在data数据中查咋对应key等于str里的值
+     * @param {*} str
+     * @param {*} data
+     * @param {*} key
+     * @param {*} nestedKey
+     * @returns
+     * zztool.dataFindValues(
+     *   '1,2,5',
+     *   [
+     *     {id:1,name:'张三'},
+     *     {id:2,name:'李四'},
+     *     {id:3,name:'王五',list:[{id:5,name:'一二三'}]}
+     *   ],
+     *   'id','list'
+     *  )
+     */
+    dataFindValues(str: string, data: any[], key: string, nestedKey?: string): any[];
+    /**
      * -----日期
      */
     getDateInfo(str: any): {

@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  * version: 1.0.4
  */
-'use strict'
+"use strict";
 const version = "1.0.5";
 class ZZTOOL {
   static instance: any = null;
@@ -494,6 +494,51 @@ class ZZTOOL {
     return data.filter(
       (item) => item !== "" && item !== null && item !== undefined
     );
+  }
+  /**
+   * 根据str分割后的数组 在data数据中查咋对应key等于str里的值
+   * @param {*} str
+   * @param {*} data
+   * @param {*} key
+   * @param {*} nestedKey
+   * @returns
+   * zztool.dataFindValues(
+   *   '1,2,5',
+   *   [
+   *     {id:1,name:'张三'},
+   *     {id:2,name:'李四'},
+   *     {id:3,name:'王五',list:[{id:5,name:'一二三'}]}
+   *   ],
+   *   'id','list'
+   *  )
+   */
+  dataFindValues(str:string, data:any[], key:string, nestedKey: string = "") {
+    const values = str.split(",");
+    const arrs:any[] = [];
+    if (nestedKey) {
+      const search = (data:any[]) => {
+        for (const itemkey in data) {
+          const item = data[itemkey];
+          if (
+            !item[nestedKey] &&
+            item[key] &&
+            values.includes(item[key].toString())
+          ) {
+            arrs.push(item);
+          } else if (item[nestedKey] && this.isArray(item[nestedKey])) {
+            search(item[nestedKey]);
+          }
+        }
+      };
+      search(data);
+    } else {
+      if (values.length === 1) {
+        const found = data.find((item) => item[key] === values[0]);
+        return found ? [found] : [];
+      }
+      return data.filter((item) => values.includes(item[key].toString()));
+    }
+    return arrs;
   }
   /**
    * -----日期
