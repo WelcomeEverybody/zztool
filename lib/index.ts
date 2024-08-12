@@ -2,52 +2,54 @@
  * ZZTOOL工具类
  * version: 1.0.4
  */
+'use strict'
 class ZZTOOL {
-  static instance:any = null;
-  version:string;
-  v:string;
+  static instance: any = null;
+  version: string;
+  v: string;
   constructor() {
-    this.version = '1.0.4';
-    this.v = '1.0.4'; 
-    console.log('%czztoll%c'+ `V${this.v}`,
-      'background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px',
-      'background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px',
-    )
-    if(ZZTOOL.instance){
+    this.version = "1.0.4";
+    this.v = "1.0.4";
+    console.log(
+      "%czztoll%c" + `V${this.v}`,
+      "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
+      "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px"
+    );
+    if (ZZTOOL.instance) {
       return ZZTOOL.instance;
     }
-    return ZZTOOL.instance = this;
+    return (ZZTOOL.instance = this);
   }
   /**
-   * 公共方法
+   * -----公共方法
    */
   getVersion() {
     return this.version;
   }
-  error(msg:string){
+  error(msg: string) {
     throw new Error(msg);
   }
   // 防抖
   debounce = (() => {
-    let timer:any = null
-    return (callback:Function, wait = 800) => {
-      timer&&clearTimeout(timer)
-      timer = setTimeout(callback, wait)
-    }
-  })()
+    let timer: any = null;
+    return (callback: Function, wait = 800) => {
+      timer && clearTimeout(timer);
+      timer = setTimeout(callback, wait);
+    };
+  })();
   // 节流
   throttle = (() => {
-    let last = 0
-    return (callback:Function, wait = 800) => {
-      let now = +new Date()
+    let last = 0;
+    return (callback: Function, wait = 800) => {
+      let now = +new Date();
       if (now - last > wait) {
-        callback()
-        last = now
+        callback();
+        last = now;
       }
-    }
-  })()
+    };
+  })();
   /**
-   * 类型检测
+   * -----类型检测
    */
   getType(obj: any) {
     return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -78,14 +80,13 @@ class ZZTOOL {
   }
   isUndefined(obj: any) {
     return this.getType(obj) === "undefined";
-
-  };
+  }
   isDate(obj: any) {
     return this.getType(obj) === "date";
-  };
+  }
   isRegExp(obj: any) {
     return this.getType(obj) === "regexp";
-  };
+  }
   isError(obj: any) {
     return this.getType(obj) === "error";
   }
@@ -94,78 +95,108 @@ class ZZTOOL {
   }
   isPromise(obj: any) {
     return this.getType(obj) === "promise";
-  };
+  }
   isElement(obj: any) {
     return this.getType(obj) === "element";
-  };
+  }
   /**
-   * 正则表达式
+   * -----正则表达式
    */
-  regIsHas(str:string,char:string) {
+  regIsHas(str: string, char: string) {
     return new RegExp(char).test(str);
   }
-  regEmail(str:string) {
+  regEmail(str: string) {
     return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str);
   }
-  regPhone(str:string) {
+  regPhone(str: string) {
     return /^1[3456789]\d{9}$/.test(str);
   }
-  regIdcard(str:string){
+  regIdcard(str: string) {
     if (!/^\d{17}(\d|X)$/i.test(str)) {
-        return false;
+      return false;
     }
-    const provinceCodes:any = {
-        11: "北京", 12: "天津", 13: "河北", 14: "山西", 15: "内蒙古",
-        21: "辽宁", 22: "吉林", 23: "黑龙江",
-        31: "上海", 32: "江苏", 33: "浙江", 34: "安徽", 35: "福建", 36: "江西", 37: "山东",
-        41: "河南", 42: "湖北", 43: "湖南", 44: "广东", 45: "广西", 46: "海南",
-        50: "重庆", 51: "四川", 52: "贵州", 53: "云南", 54: "西藏",
-        61: "陕西", 62: "甘肃", 63: "青海", 64: "宁夏", 65: "新疆",
-        71: "台湾", 81: "香港", 82: "澳门", 91: "国外"
+    const provinceCodes: any = {
+      11: "北京",
+      12: "天津",
+      13: "河北",
+      14: "山西",
+      15: "内蒙古",
+      21: "辽宁",
+      22: "吉林",
+      23: "黑龙江",
+      31: "上海",
+      32: "江苏",
+      33: "浙江",
+      34: "安徽",
+      35: "福建",
+      36: "江西",
+      37: "山东",
+      41: "河南",
+      42: "湖北",
+      43: "湖南",
+      44: "广东",
+      45: "广西",
+      46: "海南",
+      50: "重庆",
+      51: "四川",
+      52: "贵州",
+      53: "云南",
+      54: "西藏",
+      61: "陕西",
+      62: "甘肃",
+      63: "青海",
+      64: "宁夏",
+      65: "新疆",
+      71: "台湾",
+      81: "香港",
+      82: "澳门",
+      91: "国外",
     };
     if (!provinceCodes[str.substring(0, 2)]) {
-        return false;
+      return false;
     }
     const birthday = str.substring(6, 8);
     const year = birthday.substring(0, 4);
     const month = birthday.substring(4, 2);
     const day = birthday.substring(6, 2);
-    const birthDate = new Date(year + '/' + month + '/' + day);
-    if (birthDate.getFullYear() !== parseInt(year) ||
-        (birthDate.getMonth() + 1) !== parseInt(month) ||
-        birthDate.getDate() !== parseInt(day)) {
-        return false;
+    const birthDate = new Date(year + "/" + month + "/" + day);
+    if (
+      birthDate.getFullYear() !== parseInt(year) ||
+      birthDate.getMonth() + 1 !== parseInt(month) ||
+      birthDate.getDate() !== parseInt(day)
+    ) {
+      return false;
     }
     const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-    const checkCodes = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+    const checkCodes = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"];
     let sum = 0;
     for (let i = 0; i < 17; i++) {
-        sum += this.toNumber(str[i]) * weights[i];
+      sum += this.toNumber(str[i]) * weights[i];
     }
     const calculatedCheckCode = checkCodes[sum % 11];
     if (str[17].toUpperCase() !== calculatedCheckCode) {
-        return false;
+      return false;
     }
 
     return true;
   }
 
   /**
-   * 字符串操作
+   * -----字符串操作
    */
-  getFirstChar(str:string) {
+  getFirstChar(str: string) {
     if (!this.isString(str)) {
       this.error("参数类型错误，必须为字符串");
     }
     return str.substring(0, 1);
   }
-  getLastChar(str:string) {
+  getLastChar(str: string) {
     if (!this.isString(str)) {
       this.error("参数类型错误，必须为字符串");
     }
     return str.substring(str.length - 1, str.length);
   }
-  getChar(str:string,start:number,end:number) {
+  getChar(str: string, start: number, end: number) {
     if (!this.isString(str)) {
       this.error("参数类型错误，必须为字符串");
     }
@@ -175,186 +206,208 @@ class ZZTOOL {
     }
     return char;
   }
-  toString(obj:any){
-    if(!obj) this.error
+  toString(obj: any) {
+    if (!obj) this.error;
     const chars = JSON.stringify(obj);
-    if(this.getFirstChar(chars) === "\\"){
-      return chars.replace(/\\/g,"");
+    if (this.getFirstChar(chars) === "\\") {
+      return chars.replace(/\\/g, "");
     }
     return chars;
   }
-  toArray(obj:any,index=""){
+  toArray(obj: any, index = "") {
     if (this.isUndefined(obj) || this.isNull(obj) || obj === "")
       this.error("该变量没有值");
     if (this.isArray(obj)) return [...obj];
     const chars = this.isString(obj) ? obj : this.toString(obj);
     const firstChar = this.getFirstChar(chars);
-    try{
-      const method:any = {
+    try {
+      const method: any = {
         "{": () => {
-          return Object.entries(JSON.parse(chars))
+          return Object.entries(JSON.parse(chars));
         },
-        "[": () => {return JSON.parse(chars)}
+        "[": () => {
+          return JSON.parse(chars);
+        },
+      };
+      if (method[firstChar]) {
+        return method[firstChar]();
       }
-      if(method[firstChar]){
-        return method[firstChar]()
+      if (this.regIsHas(chars, ",")) {
+        return chars.split(",");
       }
-      if(this.regIsHas(chars,",")){
-        return chars.split(",")
-      }
-      if(this.regIsHas(chars," ")){
-        return chars.split(" ")
+      if (this.regIsHas(chars, " ")) {
+        return chars.split(" ");
       }
       return chars.split(index);
-    }catch(e){
-      return chars
+    } catch (e) {
+      return chars;
     }
   }
-  toNumber(obj:any) {
+  toNumber(obj: any) {
     if (this.isUndefined(obj) || this.isNull(obj) || obj === "")
       this.error("该变量没有值");
     if (this.isNumber(obj)) return obj;
     const chars = this.isString(obj) ? obj : this.toString(obj);
     return this.isNaN(Number(chars)) ? Number(chars) : chars;
   }
-  toBoolean(obj:any) {
+  toBoolean(obj: any) {
     if (this.isBoolean(obj)) return obj;
     return obj ? true : false;
-  };
+  }
   /**
-   * 工具函数
+   * -----工具函数
    */
-  getRandom (min:number, max:number) {
+  getRandom(min: number, max: number) {
     if (!this.isNumber(min) || !this.isNumber(max)) {
       this.error("参数类型错误，必须为数字");
     }
     return Math.floor(Math.random() * (max - min + 1) + min);
-  };
-  getRandomArray(length:number, min:number, max:number){
+  }
+  getRandomArray(length: number, min: number, max: number) {
     const arr = [];
-    for(let i = 0; i < length; i++){
+    for (let i = 0; i < length; i++) {
       arr.push(this.getRandom(min, max));
     }
     return arr;
   }
-  getRandomColor(){
+  getRandomColor() {
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
   }
-  getRandomRGBColor(){
-    return `rgb(${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 255)})`;
+  getRandomRGBColor() {
+    return `rgb(${this.getRandom(0, 255)},${this.getRandom(
+      0,
+      255
+    )},${this.getRandom(0, 255)})`;
   }
-  getRandomRGBA(){
-    return `rgba(${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 255)},${this.getRandom(0, 100) / 100})`;
+  getRandomRGBA() {
+    return `rgba(${this.getRandom(0, 255)},${this.getRandom(
+      0,
+      255
+    )},${this.getRandom(0, 255)},${this.getRandom(0, 100) / 100})`;
   }
   /**
+   * -----数据处理
+   */
+  /**
    * 数据对比
-   * 以obj1为基准进行比对 
-   * @param {*} obj1 
-   * @param {*} obj2 
+   * 以obj1为基准进行比对
+   * @param {*} obj1
+   * @param {*} obj2
    * @param {boolean} returnIndex 是否返回不一致的索引
    */
-  dataEqual(obj1:any, obj2:any,returnIndex: boolean=false){
+  dataEqual(obj1: any, obj2: any, returnIndex: boolean = false) {
     const type1 = this.getType(obj1);
     const type2 = this.getType(obj2);
-    if(type1 !== type2){
+    if (type1 !== type2) {
       return false;
     }
-    if(!returnIndex){
+    if (!returnIndex) {
       return JSON.stringify(obj1) === JSON.stringify(obj2);
     }
-    function diffObjects(obj1:any, obj2:any) {
-      const differences:any = {};
+    function diffObjects(obj1: any, obj2: any) {
+      const differences: any = {};
       const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
       for (const key of keys) {
         if (obj1[key] !== obj2[key]) {
           // 如果值不相同，且值之一是对象，则递归调用 diffObjects
-          if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+          if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
             const nestedDiff = diffObjects(obj1[key], obj2[key]);
             if (Object.keys(nestedDiff).length > 0) {
               differences[key] = nestedDiff;
             }
           } else {
             differences[key] = {
-              oldValue: obj1[key] ? obj1[key] : '',
-              newValue: obj2[key] ? obj2[key] : ''
+              oldValue: obj1[key] ? obj1[key] : "",
+              newValue: obj2[key] ? obj2[key] : "",
             };
           }
         }
       }
       return differences;
     }
-    return diffObjects(obj1,obj2)
+    return diffObjects(obj1, obj2);
   }
   /**
    * 判断对象中是否有空值
-   * @param {*} obj 
+   * @param {*} obj
    * @param {boolean} index 是否返回空值的索引
-   * @returns 
+   * @returns
    */
-  dataEmpty(obj:any,index: boolean=false){
-    if(obj == null || obj == undefined || this.toString(obj) === "{}" || this.toString(obj) === "[]") return true;
+  dataEmpty(obj: any, index: boolean = false) {
+    if (
+      obj == null ||
+      obj == undefined ||
+      this.toString(obj) === "{}" ||
+      this.toString(obj) === "[]"
+    )
+      return true;
     const that = this;
-    const EmptyIndex:any = {};
-    function empty(obj:any){
-      for(const key in obj){
+    const EmptyIndex: any = {};
+    function empty(obj: any) {
+      for (const key in obj) {
         const value = obj[key];
-        if(value === "" || value == null || value == undefined || that.toString(value) === "{}" || that.toString(value) === "[]"){
-          if(index){
+        if (
+          value === "" ||
+          value == null ||
+          value == undefined ||
+          that.toString(value) === "{}" ||
+          that.toString(value) === "[]"
+        ) {
+          if (index) {
             EmptyIndex[key] = value;
-          }else{
+          } else {
             return true;
           }
-        }else if(that.isObject(value) || that.isArray(value)){
-          return empty(value)
+        } else if (that.isObject(value) || that.isArray(value)) {
+          return empty(value);
         }
       }
       return false;
     }
     const hasEmpty = empty(obj);
-    if(index){
+    if (index) {
       return this.toString(EmptyIndex) === "{}" ? false : EmptyIndex;
     }
     return hasEmpty;
   }
   /**
    * 深克隆
-   * @param {*} obj 
-   * @returns 
+   * @param {*} obj
+   * @returns
    */
-  deepClone(obj:any){
+  deepClone(obj: any) {
     if (obj === null || obj === undefined) return obj;
-    if (typeof obj !== 'object') return obj;
+    if (typeof obj !== "object") return obj;
     if (obj instanceof Date) return new Date(obj.getTime());
     if (Array.isArray(obj)) {
-      const arrCopy:any[] = [];
+      const arrCopy: any[] = [];
       obj.forEach((item, index) => {
         arrCopy[index] = this.deepClone(item);
       });
       return arrCopy;
     }
     if (obj instanceof Object) {
-      const objCopy:any = {};
-      Object.keys(obj).forEach(key => {
+      const objCopy: any = {};
+      Object.keys(obj).forEach((key) => {
         objCopy[key] = this.deepClone(obj[key]);
       });
       return objCopy;
     }
     this.error("Unsupported data type");
-  
   }
   /**
    * 转树形结构
-   * @param {*} data 
+   * @param {*} data
    * @param {*} pid   父级id
    */
-  toTree(data:any[], pid:string){
-    let tree:any[] = [];
-    let lookup:any = {};
-  
-    data.forEach(item => {
+  toTree(data: any[], pid: string) {
+    let tree: any[] = [];
+    let lookup: any = {};
+
+    data.forEach((item) => {
       lookup[item.id] = { ...item, children: [] };
     });
-    data.forEach(item => {
+    data.forEach((item) => {
       if (item[pid] === null) {
         tree.push(lookup[item.id]);
       } else {
@@ -365,11 +418,11 @@ class ZZTOOL {
   }
   /**
    * 数据分组
-   * @param {*} data 
+   * @param {*} data
    * @param {*} key
    */
-  groupBy(data:any[], key:string){
-    return data.reduce((result:any, item:any) => {
+  groupBy(data: any[], key: string) {
+    return data.reduce((result: any, item: any) => {
       const groupKey = item[key];
       if (!result[groupKey]) {
         result[groupKey] = [];
@@ -380,7 +433,7 @@ class ZZTOOL {
   }
   /**
    * 合并数据，取交集/并集/差集/补集
-   * @param {*} data1 
+   * @param {*} data1
    * @param {*} data2
    * @param {*} type 1：并集，2：交集，3：差集，4：补集
    * 并集：合并去重
@@ -388,94 +441,103 @@ class ZZTOOL {
    * 差集：data1中有，data2中没有的值
    * 补集：两个数组中各自没有的值
    */
-    dataMerge(data1:any[], data2:any[], type:number = 1) {
-      switch (type) {
-          case 1:
-              return [...new Set([...data1, ...data2])];
-          case 2:
-              return data1.filter(item => data2.includes(item));
-          case 3:
-              return data1.filter(item => !data2.includes(item));
-          case 4:
-              return data1.filter(item => !data2.includes(item)).concat(data2.filter(item => !data1.includes(item)));
-      }
+  dataMerge(data1: any[], data2: any[], type: number = 1) {
+    switch (type) {
+      case 1:
+        return [...new Set([...data1, ...data2])];
+      case 2:
+        return data1.filter((item) => data2.includes(item));
+      case 3:
+        return data1.filter((item) => !data2.includes(item));
+      case 4:
+        return data1
+          .filter((item) => !data2.includes(item))
+          .concat(data2.filter((item) => !data1.includes(item)));
+    }
   }
   /**
    * 数组去重
    */
-  dataUnique(data:any[]) {
-      return [...new Set(data)];
+  dataUnique(data: any[]) {
+    return [...new Set(data)];
   }
   /**
    * 根据某个字段找对应的数组或对象，如果有两个相同的数据会优先返回第一个
-   * @param {*} data 
-   * @param {*} key 
-   * @param {*} value 
+   * @param {*} data
+   * @param {*} key
+   * @param {*} value
    */
-  dataFind(data:any, key:any, value:any) {
-    const find = (data:any) => {
-      for(const itemkey in data){
-        if(itemkey === key && data[itemkey] === value){
-          return {key: itemkey, value: data[itemkey]}
-        }else if(this.isArray(data[itemkey]) || this.isObject(data[itemkey])){
-          const result:any = find(data[itemkey])
-          if(result){
-            return result
+  dataFind(data: any, key: any, value: any) {
+    const find = (data: any) => {
+      for (const itemkey in data) {
+        if (itemkey === key && data[itemkey] === value) {
+          return { key: itemkey, value: data[itemkey] };
+        } else if (
+          this.isArray(data[itemkey]) ||
+          this.isObject(data[itemkey])
+        ) {
+          const result: any = find(data[itemkey]);
+          if (result) {
+            return result;
           }
         }
       }
       return null;
-    }
+    };
     return find(data);
   }
   /**
    * 数组去空
    */
-  dataUnEmpty(data:any[]) {
-    return data.filter(item => item !== '' && item !== null && item !== undefined);
+  dataUnEmpty(data: any[]) {
+    return data.filter(
+      (item) => item !== "" && item !== null && item !== undefined
+    );
   }
   /**
-   * 日期
+   * -----日期
    */
-  getDateInfo(str:any){
+  getDateInfo(str: any) {
     let strs = str;
-    if(this.isString(str) && this.regIsHas(str,'-')){
-        strs = str.replaceAll('-','\/');
+    if (this.isString(str) && this.regIsHas(str, "-")) {
+      strs = str.replaceAll("-", "/");
     }
     const date = strs ? new Date(strs) : new Date();
     const year = date.getFullYear();
-    const month = this.toString(date.getMonth() + 1).padStart(2, '0');
-    const day = this.toString(date.getDate()).padStart(2, '0');
-    const hour = this.toString(date.getHours()).padStart(2, '0');
-    const minute = this.toString(date.getMinutes()).padStart(2, '0');
-    const second = this.toString(date.getSeconds()).padStart(2, '0');
+    const month = this.toString(date.getMonth() + 1).padStart(2, "0");
+    const day = this.toString(date.getDate()).padStart(2, "0");
+    const hour = this.toString(date.getHours()).padStart(2, "0");
+    const minute = this.toString(date.getMinutes()).padStart(2, "0");
+    const second = this.toString(date.getSeconds()).padStart(2, "0");
     return { year, month, day, hour, minute, second };
   }
-  getDateType(date:any,type='Y/M/D h:m:s') {
+  getDateType(date: any, type = "Y/M/D h:m:s") {
     const { year, month, day, hour, minute, second } = date;
-    const [datePart, timePart] = type.split(' ');
-    const regString = new RegExp(/[yYmdDhHmMsS]/g)
-    const indexMap:any = {
-        h: hour,
-        H: hour,
-        m: minute,
-        M: minute,
-        s: second,
-        S: second,
-    }
-    const dateIcon = datePart.replace(regString, '').charAt(0);
-    const dateString = [year,month,day].join(dateIcon);
+    const [datePart, timePart] = type.split(" ");
+    const regString = new RegExp(/[yYmdDhHmMsS]/g);
+    const indexMap: any = {
+      h: hour,
+      H: hour,
+      m: minute,
+      M: minute,
+      s: second,
+      S: second,
+    };
+    const dateIcon = datePart.replace(regString, "").charAt(0);
+    const dateString = [year, month, day].join(dateIcon);
     let timeString = "";
-    if(timePart){
-        const timeIcon = timePart.replace(regString, '').charAt(0);
-        timeString = this.dataUnEmpty(timePart.split(timeIcon)).map(item => {
-            return indexMap[item];
-        }).join(timeIcon);
+    if (timePart) {
+      const timeIcon = timePart.replace(regString, "").charAt(0);
+      timeString = this.dataUnEmpty(timePart.split(timeIcon))
+        .map((item) => {
+          return indexMap[item];
+        })
+        .join(timeIcon);
     }
     return timeString ? `${dateString} ${timeString}` : dateString;
   }
-  getDate(str:any, type='Y/M/D h:m:s') {
-      return this.getDateType(this.getDateInfo(str),type)
+  getDate(str: any, type = "Y/M/D h:m:s") {
+    return this.getDateType(this.getDateInfo(str), type);
   }
 }
 
