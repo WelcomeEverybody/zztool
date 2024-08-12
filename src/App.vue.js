@@ -1,11 +1,13 @@
+import { inject } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-// import { inject  } from 'vue'
-// const zztool: any = inject('$ZZTOOL')
-// // const obj1 = { a: 1, b: { x: 10,y:{a:'1',c:{},b:[1]} }, c: 3 };
-// // const obj2 = { a: 1, b: { x:[{a:'1',b:[{a:''}]}] }, d: 4 };
+const zztool = inject('$ZZTOOL');
+// const obj1 = { a: 1, b: { x: 10,y:{a:'1',c:{},b:[1]} }, c: 3 };
+// const obj2 = { a: 1, b: { x: [{ a: '1', b: [{ a: 0 }, { z: 1 }] }] }, d: 4 };
 // // const arr = [1,2,3,4,'']
 // // console.log(zztool.dataEmpty(arr,true));
 // // console.log(zztool.toString('123'));
+// let arrA = [1, 2, 3, 4]
+// let arrB = [4, 5, 6, 7]
 // const flatData = [
 //   { id: 1, name: "Root", parentId: null },
 //   { id: 2, name: "Child 1", parentId: 1 },
@@ -24,7 +26,7 @@ const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, define
 //   { id: 15, name: "Child 2.2.2.2", parentId: 13 },
 //   { id: 16, name: "Child 2.2.2.3", parentId: 13 }
 // ];
-// console.log(flatData)
+console.log(zztool.getDate(new Date(), 'Y-M-D'));
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;

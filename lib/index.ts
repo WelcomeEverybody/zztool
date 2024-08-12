@@ -1,14 +1,18 @@
 /**
  * ZZTOOL工具类
- * version: 1.0.3
+ * version: 1.0.4
  */
 class ZZTOOL {
   static instance:any = null;
   version:string;
   v:string;
   constructor() {
-    this.version = '1.0.3';
-    this.v = '1.0.3'; 
+    this.version = '1.0.4';
+    this.v = '1.0.4'; 
+    console.log('%czztoll%c'+ `V${this.v}`,
+      'background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px',
+      'background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px',
+    )
     if(ZZTOOL.instance){
       return ZZTOOL.instance;
     }
@@ -294,7 +298,7 @@ class ZZTOOL {
     function empty(obj:any){
       for(const key in obj){
         const value = obj[key];
-        if(!value || value == null || value == undefined || that.toString(value) === "{}" || that.toString(value) === "[]"){
+        if(value === "" || value == null || value == undefined || that.toString(value) === "{}" || that.toString(value) === "[]"){
           if(index){
             EmptyIndex[key] = value;
           }else{
@@ -373,6 +377,105 @@ class ZZTOOL {
       result[groupKey].push(item);
       return result;
     }, {});
+  }
+  /**
+   * 合并数据，取交集/并集/差集/补集
+   * @param {*} data1 
+   * @param {*} data2
+   * @param {*} type 1：并集，2：交集，3：差集，4：补集
+   * 并集：合并去重
+   * 交集：两个数组都有的值
+   * 差集：data1中有，data2中没有的值
+   * 补集：两个数组中各自没有的值
+   */
+    dataMerge(data1:any[], data2:any[], type:number = 1) {
+      switch (type) {
+          case 1:
+              return [...new Set([...data1, ...data2])];
+          case 2:
+              return data1.filter(item => data2.includes(item));
+          case 3:
+              return data1.filter(item => !data2.includes(item));
+          case 4:
+              return data1.filter(item => !data2.includes(item)).concat(data2.filter(item => !data1.includes(item)));
+      }
+  }
+  /**
+   * 数组去重
+   */
+  dataUnique(data:any[]) {
+      return [...new Set(data)];
+  }
+  /**
+   * 根据某个字段找对应的数组或对象，如果有两个相同的数据会优先返回第一个
+   * @param {*} data 
+   * @param {*} key 
+   * @param {*} value 
+   */
+  dataFind(data:any, key:any, value:any) {
+    const find = (data:any) => {
+      for(const itemkey in data){
+        if(itemkey === key && data[itemkey] === value){
+          return {key: itemkey, value: data[itemkey]}
+        }else if(this.isArray(data[itemkey]) || this.isObject(data[itemkey])){
+          const result:any = find(data[itemkey])
+          if(result){
+            return result
+          }
+        }
+      }
+      return null;
+    }
+    return find(data);
+  }
+  /**
+   * 数组去空
+   */
+  dataUnEmpty(data:any[]) {
+    return data.filter(item => item !== '' && item !== null && item !== undefined);
+  }
+  /**
+   * 日期
+   */
+  getDateInfo(str:any){
+    let strs = str;
+    if(this.isString(str) && this.regIsHas(str,'-')){
+        strs = str.replaceAll('-','\/');
+    }
+    const date = strs ? new Date(strs) : new Date();
+    const year = date.getFullYear();
+    const month = this.toString(date.getMonth() + 1).padStart(2, '0');
+    const day = this.toString(date.getDate()).padStart(2, '0');
+    const hour = this.toString(date.getHours()).padStart(2, '0');
+    const minute = this.toString(date.getMinutes()).padStart(2, '0');
+    const second = this.toString(date.getSeconds()).padStart(2, '0');
+    return { year, month, day, hour, minute, second };
+  }
+  getDateType(date:any,type='Y/M/D h:m:s') {
+    const { year, month, day, hour, minute, second } = date;
+    const [datePart, timePart] = type.split(' ');
+    const regString = new RegExp(/[yYmdDhHmMsS]/g)
+    const indexMap:any = {
+        h: hour,
+        H: hour,
+        m: minute,
+        M: minute,
+        s: second,
+        S: second,
+    }
+    const dateIcon = datePart.replace(regString, '').charAt(0);
+    const dateString = [year,month,day].join(dateIcon);
+    let timeString = "";
+    if(timePart){
+        const timeIcon = timePart.replace(regString, '').charAt(0);
+        timeString = this.dataUnEmpty(timePart.split(timeIcon)).map(item => {
+            return indexMap[item];
+        }).join(timeIcon);
+    }
+    return timeString ? `${dateString} ${timeString}` : dateString;
+  }
+  getDate(str:any, type='Y/M/D h:m:s') {
+      return this.getDateType(this.getDateInfo(str),type)
   }
 }
 
