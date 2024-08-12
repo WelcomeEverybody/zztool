@@ -1,21 +1,17 @@
-/**
- * ZZTOOL工具类
- * version: 1.0.4
- */
 declare class ZZTOOL {
     static instance: any;
     version: string;
     v: string;
     constructor();
     /**
-     * 公共方法
+     * -----公共方法
      */
     getVersion(): string;
     error(msg: string): void;
     debounce: (callback: Function, wait?: number) => void;
     throttle: (callback: Function, wait?: number) => void;
     /**
-     * 类型检测
+     * -----类型检测
      */
     getType(obj: any): string;
     isArray(obj: any): boolean;
@@ -34,14 +30,14 @@ declare class ZZTOOL {
     isPromise(obj: any): boolean;
     isElement(obj: any): boolean;
     /**
-     * 正则表达式
+     * -----正则表达式
      */
     regIsHas(str: string, char: string): boolean;
     regEmail(str: string): boolean;
     regPhone(str: string): boolean;
     regIdcard(str: string): boolean;
     /**
-     * 字符串操作
+     * -----字符串操作
      */
     getFirstChar(str: string): string;
     getLastChar(str: string): string;
@@ -51,13 +47,16 @@ declare class ZZTOOL {
     toNumber(obj: any): any;
     toBoolean(obj: any): any;
     /**
-     * 工具函数
+     * -----工具函数
      */
     getRandom(min: number, max: number): number;
     getRandomArray(length: number, min: number, max: number): number[];
     getRandomColor(): string;
     getRandomRGBColor(): string;
     getRandomRGBA(): string;
+    /**
+     * -----数据处理
+     */
     /**
      * 数据对比
      * 以obj1为基准进行比对
@@ -118,7 +117,7 @@ declare class ZZTOOL {
      */
     dataUnEmpty(data: any[]): any[];
     /**
-     * 日期
+     * -----日期
      */
     getDateInfo(str: any): {
         year: number;

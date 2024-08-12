@@ -3,13 +3,14 @@
  * version: 1.0.4
  */
 'use strict'
+const version = "1.0.5";
 class ZZTOOL {
   static instance: any = null;
   version: string;
   v: string;
   constructor() {
-    this.version = "1.0.4";
-    this.v = "1.0.4";
+    this.version = version;
+    this.v = version;
     console.log(
       "%czztoll%c" + `V${this.v}`,
       "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
