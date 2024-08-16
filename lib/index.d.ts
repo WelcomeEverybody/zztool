@@ -42,6 +42,9 @@ declare class ZZTOOL {
     getFirstChar(str: string): string;
     getLastChar(str: string): string;
     getChar(str: string, start: number, end: number): string;
+    /**
+     * -----转类型
+     */
     toString(obj: any): string;
     toArray(obj: any, index?: string): any;
     toNumber(obj: any): any;
@@ -54,6 +57,7 @@ declare class ZZTOOL {
     getRandomColor(): string;
     getRandomRGBColor(): string;
     getRandomRGBA(): string;
+    moneyFormat(money: string | number, char?: string, first?: string): string;
     /**
      * -----数据处理
      */
@@ -147,5 +151,11 @@ declare class ZZTOOL {
     };
     getDateType(date: any, type?: string): string;
     getDate(str: any, type?: string): string;
+    /**
+     * date不为空时获取date的周日期
+     * @param {*} date
+     * @returns
+     */
+    getWeekTime(date: any): string[];
 }
 export default ZZTOOL;

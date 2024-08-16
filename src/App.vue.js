@@ -2,11 +2,13 @@ import { inject } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
 const zztool = inject('$ZZTOOL');
 console.log(zztool.getDate(new Date(), 'Y-M-D'));
+console.time();
 console.log(zztool.dataFindValues('1,2,5', [
     { id: 1, name: '张三' },
     { id: 2, name: '李四' },
     { id: 3, name: '王五', list: [{ id: 5, name: '一二三' }] }
 ], 'id', 'list'));
+console.timeEnd();
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
