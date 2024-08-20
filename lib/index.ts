@@ -208,6 +208,34 @@ class ZZTOOL {
     return char;
   }
   /**
+   * 参数获取
+   */
+  getUrlParam(url:string) {
+    return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
+      (a:any, v) => (
+        (a[v.slice(0, v.indexOf("="))] = v.slice(v.indexOf("=") + 1)), a
+      ),
+      {}
+    );
+  }
+  paramformat(obj:any, type = "url") {
+    if (type === "url") {
+      return Object.keys(obj)
+        .map((key) => `${key}=${obj[key]}`)
+        .join("&");
+    }
+    if (type === "json") {
+      return JSON.stringify(obj);
+    }
+    if (type === "formData") {
+      const formData = new FormData();
+      for (const key in obj) {
+        formData.append(key, obj[key]);
+      }
+      return formData;
+    }
+  }
+  /**
    * -----转类型
    */
   toString(obj: any) {
@@ -230,7 +258,7 @@ class ZZTOOL {
       if (chars.includes(" ")) return chars.split(" ");
       return chars.split(index);
     } catch (e) {
-        return chars;
+      return chars;
     }
   }
   toNumber(obj: any) {
@@ -241,8 +269,7 @@ class ZZTOOL {
     return this.isNaN(Number(chars)) ? Number(chars) : chars;
   }
   toBoolean(obj: any) {
-    if (this.isBoolean(obj)) return obj;
-    return obj ? true : false;
+    return Boolean(obj);
   }
   /**
    * -----工具函数
@@ -275,15 +302,15 @@ class ZZTOOL {
       255
     )},${this.getRandom(0, 255)},${this.getRandom(0, 100) / 100})`;
   }
-  moneyFormat(money:string|number,char=',',first="") {
-    let str = money.toString()
-    let index = str.indexOf('.')
+  moneyFormat(money: string | number, char = ",", first = "") {
+    let str = money.toString();
+    let index = str.indexOf(".");
     if (index === -1) {
-      index = str.length
+      index = str.length;
     }
     while (index > 3) {
-      index -= 3
-      str = str.slice(0, index) + char + str.slice(index)
+      index -= 3;
+      str = str.slice(0, index) + char + str.slice(index);
     }
     return first ? first + str : str;
   }
@@ -513,11 +540,16 @@ class ZZTOOL {
    *   'id','list'
    *  )
    */
-  dataFindValues(str:string, data:any[], key:string, nestedKey: string = "") {
+  dataFindValues(
+    str: string,
+    data: any[],
+    key: string,
+    nestedKey: string = ""
+  ) {
     const values = str.split(",");
-    const arrs:any[] = [];
+    const arrs: any[] = [];
     if (nestedKey) {
-      const search = (data:any[]) => {
+      const search = (data: any[]) => {
         for (const itemkey in data) {
           const item = data[itemkey];
           if (
@@ -552,10 +584,10 @@ class ZZTOOL {
     const date = strs ? new Date(strs) : new Date();
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = (date.getDate()).toString().padStart(2, "0");
-    const hour = (date.getHours()).toString().padStart(2, "0");
-    const minute = (date.getMinutes()).toString().padStart(2, "0");
-    const second = (date.getSeconds()).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const hour = date.getHours().toString().padStart(2, "0");
+    const minute = date.getMinutes().toString().padStart(2, "0");
+    const second = date.getSeconds().toString().padStart(2, "0");
     return { year, month, day, hour, minute, second };
   }
   getDateType(date: any, type = "Y/M/D h:m:s") {
@@ -573,25 +605,20 @@ class ZZTOOL {
   }
   /**
    * date不为空时获取date的周日期
-   * @param {*} date 
-   * @returns 
+   * @param {*} date
+   * @returns
    */
-  getWeekTime(date:any) {
+  getWeekTime(date = new Date()) {
     const now = new Date(date);
     const dayOfWeek = now.getDay();
     const startOfWeek = new Date(now);
-    if (date) {
-        startOfWeek.setDate(now.getDate() - dayOfWeek + 1);
-    } else {
-        startOfWeek.setTime(Date.now());
-    }
+    startOfWeek.setDate(now.getDate() - dayOfWeek + 1);
     return Array.from({ length: 7 }, (_, i) => {
-        const date = new Date(startOfWeek);
-        date.setDate(startOfWeek.getDate() + i);
-        return date.toLocaleDateString();
+      const date = new Date(startOfWeek);
+      date.setDate(startOfWeek.getDate() + i);
+      return date.toLocaleDateString();
     });
   }
-  
 }
 
 export default ZZTOOL;

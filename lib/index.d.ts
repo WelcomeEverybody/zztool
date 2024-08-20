@@ -43,12 +43,17 @@ declare class ZZTOOL {
     getLastChar(str: string): string;
     getChar(str: string, start: number, end: number): string;
     /**
+     * 参数获取
+     */
+    getUrlParam(url: string): any;
+    paramformat(obj: any, type?: string): string | FormData | undefined;
+    /**
      * -----转类型
      */
     toString(obj: any): string;
     toArray(obj: any, index?: string): any;
     toNumber(obj: any): any;
-    toBoolean(obj: any): any;
+    toBoolean(obj: any): boolean;
     /**
      * -----工具函数
      */
@@ -156,6 +161,6 @@ declare class ZZTOOL {
      * @param {*} date
      * @returns
      */
-    getWeekTime(date: any): string[];
+    getWeekTime(date?: Date): string[];
 }
 export default ZZTOOL;
