@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.0.9";
+const version = "1.1.0";
 class ZZTOOL {
   static instance: any = null;
   version: string;
@@ -155,10 +155,10 @@ class ZZTOOL {
     if (!provinceCodes[str.substring(0, 2)]) {
       return false;
     }
-    const birthday = str.substring(6, 8);
+    const birthday = str.substring(6, 14);
     const year = birthday.substring(0, 4);
-    const month = birthday.substring(4, 2);
-    const day = birthday.substring(6, 2);
+    const month = birthday.substring(4, 6);
+    const day = birthday.substring(6, 14);
     const birthDate = new Date(year + "/" + month + "/" + day);
     if (
       birthDate.getFullYear() !== parseInt(year) ||
@@ -171,6 +171,7 @@ class ZZTOOL {
     const checkCodes = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"];
     let sum = 0;
     for (let i = 0; i < 17; i++) {
+      console.log(str[i], weights[i]);
       sum += this.toNumber(str[i]) * weights[i];
     }
     const calculatedCheckCode = checkCodes[sum % 11];

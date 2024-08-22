@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-const zztool: any = inject('$ZZTOOL');
-console.log(zztool.getDateType(new Date()));
+import ZZTOOL from '../lib/index'
+const zztool: ZZTOOL = inject('$ZZTOOL') as ZZTOOL; 
+const is = zztool.regIdcard("41088120001005855")
+console.log(is);
 
 </script>
 

@@ -1,7 +1,8 @@
 import { inject } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
 const zztool = inject('$ZZTOOL');
-console.log(zztool.getDateType(new Date()));
+const is = zztool.regIdcard("41088120001005855");
+console.log(is);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
