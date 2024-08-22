@@ -62,6 +62,13 @@ declare class ZZTOOL {
     getRandomColor(): string;
     getRandomRGBColor(): string;
     getRandomRGBA(): string;
+    /**
+     * 金额以千分位符格式化
+     * @param money
+     * @param char
+     * @param first
+     * @returns
+     */
     moneyFormat(money: string | number, char?: string, first?: string): string;
     /**
      * -----数据处理
@@ -147,14 +154,26 @@ declare class ZZTOOL {
      * -----日期
      */
     getDateInfo(str: any): {
-        year: number;
-        month: string;
-        day: string;
-        hour: string;
-        minute: string;
-        second: string;
+        year: any;
+        month: any;
+        day: any;
+        hour: any;
+        minute: any;
+        second: any;
     };
+    /**
+     * 获取日期类型
+     * @param date
+     * @param type
+     * @returns
+     */
     getDateType(date: any, type?: string): string;
+    /**
+     * 如果只有一个参数，str会被当为type传递
+     * @param str
+     * @param type
+     * @returns
+     */
     getDate(str: any, type?: string): string;
     /**
      * date不为空时获取date的周日期
@@ -162,5 +181,28 @@ declare class ZZTOOL {
      * @returns
      */
     getWeekTime(date?: Date): string[];
+    /**
+     * 获取日期是星期几
+     * @param {*} date
+     * @returns
+     */
+    getMonthDays(year?: number, month?: number): number;
+    /**
+     * 获取日期是星期几
+     * @param {*} date
+     * @returns
+     */
+    getWeekDay(date?: Date): string;
+    /**
+     * 获取本月有几周
+     * @returns
+     */
+    weekInMonthCount(): number;
+    /**
+     * 获取某年中有几周
+     * @param {*} year
+     * @returns
+     */
+    getYearWeeks(year?: number): number;
 }
 export default ZZTOOL;

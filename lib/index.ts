@@ -1,9 +1,8 @@
 /**
  * ZZTOOL工具类
- * version: 1.0.7
  */
 "use strict";
-const version = "1.0.7";
+const version = "1.0.9";
 class ZZTOOL {
   static instance: any = null;
   version: string;
@@ -210,15 +209,15 @@ class ZZTOOL {
   /**
    * 参数获取
    */
-  getUrlParam(url:string) {
+  getUrlParam(url: string) {
     return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
-      (a:any, v) => (
+      (a: any, v) => (
         (a[v.slice(0, v.indexOf("="))] = v.slice(v.indexOf("=") + 1)), a
       ),
       {}
     );
   }
-  paramformat(obj:any, type = "url") {
+  paramformat(obj: any, type = "url") {
     if (type === "url") {
       return Object.keys(obj)
         .map((key) => `${key}=${obj[key]}`)
@@ -302,6 +301,13 @@ class ZZTOOL {
       255
     )},${this.getRandom(0, 255)},${this.getRandom(0, 100) / 100})`;
   }
+  /**
+   * 金额以千分位符格式化
+   * @param money 
+   * @param char 
+   * @param first 
+   * @returns 
+   */
   moneyFormat(money: string | number, char = ",", first = "") {
     let str = money.toString();
     let index = str.indexOf(".");
@@ -582,16 +588,26 @@ class ZZTOOL {
       strs = str.replaceAll("-", "/");
     }
     const date = strs ? new Date(strs) : new Date();
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const hour = date.getHours().toString().padStart(2, "0");
-    const minute = date.getMinutes().toString().padStart(2, "0");
-    const second = date.getSeconds().toString().padStart(2, "0");
+    const year:any = date.getFullYear();
+    const month:any = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day:any = date.getDate().toString().padStart(2, "0");
+    const hour:any = date.getHours().toString().padStart(2, "0");
+    const minute:any = date.getMinutes().toString().padStart(2, "0");
+    const second:any = date.getSeconds().toString().padStart(2, "0");
     return { year, month, day, hour, minute, second };
   }
+  /**
+   * 获取日期类型
+   * @param date 
+   * @param type 
+   * @returns 
+   */
   getDateType(date: any, type = "Y/M/D h:m:s") {
-    const { year, month, day, hour, minute, second } = date;
+    if(this.isObject(date)){
+      var { year, month, day, hour, minute, second } = date;
+    }else{
+      var { year, month, day, hour, minute, second } = this.getDateInfo(date)
+    }
     return type
       .replace("Y", year)
       .replace("M", month)
@@ -600,7 +616,16 @@ class ZZTOOL {
       .replace("m", minute)
       .replace("s", second);
   }
+  /**
+   * 如果只有一个参数，str会被当为type传递
+   * @param str 
+   * @param type 
+   * @returns 
+   */
   getDate(str: any, type = "Y/M/D h:m:s") {
+    if(arguments.length===1){
+      return this.getDateType(this.getDateInfo(new Date()), str);
+    }
     return this.getDateType(this.getDateInfo(str), type);
   }
   /**
@@ -618,6 +643,72 @@ class ZZTOOL {
       date.setDate(startOfWeek.getDate() + i);
       return date.toLocaleDateString();
     });
+  }
+  /**
+   * 获取日期是星期几
+   * @param {*} date
+   * @returns
+   */
+  getMonthDays(
+    year = new Date().getFullYear(),
+    month = new Date().getMonth() + 1
+  ) {
+    let stratDate = new Date(year, month - 1, 1).getTime(),
+      endData = new Date(year, month, 1).getTime();
+    let days = (endData - stratDate) / (1000 * 60 * 60 * 24);
+    return days;
+  }
+  /**
+   * 获取日期是星期几
+   * @param {*} date
+   * @returns
+   */
+  getWeekDay(date = new Date()) {
+    const week = ["日", "一", "二", "三", "四", "五", "六"];
+    return week[new Date(date).getDay()];
+  }
+  /**
+   * 获取本月有几周
+   * @returns
+   */
+  weekInMonthCount() {
+    //设置时间为本月的1号
+    let date = new Date(new Date().setDate(1) || new Date().setDate(1));
+    let firstWeekDate;
+    if (date.getDay() === 0) {
+      firstWeekDate = 6;
+    } else {
+      firstWeekDate = date.getDay() - 1;
+    }
+    date.setMonth(date.getMonth() + 1);
+    date.setDate(0);
+    let monthHasDays = date.getDate() + firstWeekDate;
+    return Math.ceil(monthHasDays / 7);
+  }
+  /**
+   * 获取某年中有几周
+   * @param {*} year
+   * @returns
+   */
+  getYearWeeks(year = new Date().getFullYear()) {
+    let first = new Date(year, 0, 1).getDay();
+    if (first == 1) {
+      first = 0;
+    } else if (first == 0) {
+      first = 1;
+    } else {
+      first = 8 - first;
+    }
+    if (
+      (year % 4 == 0 && year % 100 != 0) ||
+      (year % 100 == 0 && year % 400 == 0)
+    ) {
+      var allyears = 366;
+    } else {
+      var allyears = 365;
+    }
+    let week = Math.ceil((allyears - first) / 7) + (first !== 0 ? 1 : 0);
+    return week;
   }
 }
 

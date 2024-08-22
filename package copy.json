@@ -1,7 +1,7 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "1.0.9",
+  "version": "1.0.8",
   "type": "module",
   "main": "./lib/index.js",
   "module": "./dist/zztool.umd.cjs",
@@ -21,7 +21,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "vue": "^3.4.31"
   },
   "devDependencies": {
+    "@types/node": "^22.1.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4",
+    "vue-tsc": "^2.0.24"
   }
 }
