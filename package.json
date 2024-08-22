@@ -1,0 +1,27 @@
+{
+  "name": "@zzcpt/zztool",
+  "private": false,
+  "version": "1.0.9",
+  "type": "module",
+  "main": "./lib/index.js",
+  "module": "./dist/zztool.umd.cjs",
+  "typings": "./lib/index.d.ts",
+  "license":"MIT",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Czhangzihao/zztool"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
