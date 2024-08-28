@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.1.0";
+const version = "1.1.1";
 class ZZTOOL {
   static instance: any = null;
   version: string;
@@ -304,10 +304,10 @@ class ZZTOOL {
   }
   /**
    * 金额以千分位符格式化
-   * @param money 
-   * @param char 
-   * @param first 
-   * @returns 
+   * @param money
+   * @param char
+   * @param first
+   * @returns
    */
   moneyFormat(money: string | number, char = ",", first = "") {
     let str = money.toString();
@@ -589,25 +589,25 @@ class ZZTOOL {
       strs = str.replaceAll("-", "/");
     }
     const date = strs ? new Date(strs) : new Date();
-    const year:any = date.getFullYear();
-    const month:any = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day:any = date.getDate().toString().padStart(2, "0");
-    const hour:any = date.getHours().toString().padStart(2, "0");
-    const minute:any = date.getMinutes().toString().padStart(2, "0");
-    const second:any = date.getSeconds().toString().padStart(2, "0");
+    const year: any = date.getFullYear();
+    const month: any = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day: any = date.getDate().toString().padStart(2, "0");
+    const hour: any = date.getHours().toString().padStart(2, "0");
+    const minute: any = date.getMinutes().toString().padStart(2, "0");
+    const second: any = date.getSeconds().toString().padStart(2, "0");
     return { year, month, day, hour, minute, second };
   }
   /**
    * 获取日期类型
-   * @param date 
-   * @param type 
-   * @returns 
+   * @param date
+   * @param type
+   * @returns
    */
   getDateType(date: any, type = "Y/M/D h:m:s") {
-    if(this.isObject(date)){
+    if (this.isObject(date)) {
       var { year, month, day, hour, minute, second } = date;
-    }else{
-      var { year, month, day, hour, minute, second } = this.getDateInfo(date)
+    } else {
+      var { year, month, day, hour, minute, second } = this.getDateInfo(date);
     }
     return type
       .replace("Y", year)
@@ -619,12 +619,12 @@ class ZZTOOL {
   }
   /**
    * 如果只有一个参数，str会被当为type传递
-   * @param str 
-   * @param type 
-   * @returns 
+   * @param str
+   * @param type
+   * @returns
    */
   getDate(str: any, type = "Y/M/D h:m:s") {
-    if(arguments.length===1){
+    if (arguments.length === 1) {
       return this.getDateType(this.getDateInfo(new Date()), str);
     }
     return this.getDateType(this.getDateInfo(str), type);
@@ -646,7 +646,7 @@ class ZZTOOL {
     });
   }
   /**
-   * 获取日期是星期几
+   * 获取月份天数
    * @param {*} date
    * @returns
    */
@@ -711,6 +711,81 @@ class ZZTOOL {
     let week = Math.ceil((allyears - first) / 7) + (first !== 0 ? 1 : 0);
     return week;
   }
-}
+  /**
+   * 获取两个日期之前的日期
+   * @param {*} date
+   * @param {*} date1
+   */
+  getBetwenDate(date:any, date1:any) {
+    // 一天的时间戳
+    const oneDay = 24 * 60 * 60 * 1000;
+    const dateTime = new Date(date).getTime();
+    const dateTime1 = new Date(date1).getTime();
+    const list = [];
+    for (let i = 0; i < Math.abs(dateTime - dateTime1) / oneDay; i++) {
+      const time =
+        dateTime > dateTime1 ? dateTime - i * oneDay : dateTime + i * oneDay;
+      list.push(this.getDate(new Date(time), "Y-M-D"));
+    }
+    return list;
+  }
+  /**
+   * 获取某日期的近期天数
+   * @returns
+   * step优先级大于type
+   */
+  getDateList(date:any, type:number, hasNow = true, step = NaN) {
+    if (!date) return [];
 
+    const types = {
+      1: 3,
+      2: 7,
+    };
+    const format = "Y-M-D";
+    const oneDay = 24 * 60 * 60 * 1000;
+    let now = Date.now();
+
+    if (!hasNow) {
+      now -= oneDay;
+    }
+
+    // helper function
+    function getPrevMonth(date:any) {
+        const month = date.getMonth();
+        return {
+          year: month === 0 ? date.getFullYear() - 1 : date.getFullYear(),
+          month: month === 0 ? 12 : month,
+        };
+      }
+    const generateDateList = (count:number) =>
+      Array.from({ length: count }, (_, i) => {
+        const time = now - (count - i - 1) * oneDay;
+        return this.getDateType(new Date(time), format);
+      });
+
+    // start
+    const { year, month, day } = this.getDateInfo(now);
+
+    if (type && !step) {
+      switch (type) {
+        case 1:
+        case 2:
+          return generateDateList(types[type]);
+        case 3:
+          const { year: prevYear, month: prevMonth } = getPrevMonth(new Date());
+          return this.getBetwenDate(`${prevYear}-${prevMonth}-${day}`, now);
+        case 4:
+          return this.getBetwenDate(
+            `${year - 1}/${month}/${day}`,
+            `${year}/${month}/${day}`
+          );
+      }
+    } else if (step) {
+      return generateDateList(step);
+    }
+
+
+    return [];
+  }
+}
 export default ZZTOOL;

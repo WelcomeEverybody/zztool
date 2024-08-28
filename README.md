@@ -2,6 +2,13 @@
 
 js 工具库 操作数据，数据对比等等
 
+# 1.1.1
+
+增加方法
+
+* getBetweenDate
+* getDateList
+
 # 1.1.0
 
 修复
