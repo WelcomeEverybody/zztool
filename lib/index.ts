@@ -716,7 +716,7 @@ class ZZTOOL {
    * @param {*} date
    * @param {*} date1
    */
-  getBetwenDate(date:any, date1:any) {
+  getBetwenDate(date: any, date1: any) {
     // 一天的时间戳
     const oneDay = 24 * 60 * 60 * 1000;
     const dateTime = new Date(date).getTime();
@@ -731,10 +731,14 @@ class ZZTOOL {
   }
   /**
    * 获取某日期的近期天数
+   * @param {*} date 日期
+   * @param {*} type （三天，周，月，年）
+   * @param {*} hasNow 生成的日期是否包含今日
+   * @param {*} step 生成距离date的step天
    * @returns
    * step优先级大于type
    */
-  getDateList(date:any, type:number, hasNow = true, step = NaN) {
+  getDateList(date: any, type: number, hasNow = true, step = NaN) {
     if (!date) return [];
 
     const types = {
@@ -750,14 +754,14 @@ class ZZTOOL {
     }
 
     // helper function
-    function getPrevMonth(date:any) {
-        const month = date.getMonth();
-        return {
-          year: month === 0 ? date.getFullYear() - 1 : date.getFullYear(),
-          month: month === 0 ? 12 : month,
-        };
-      }
-    const generateDateList = (count:number) =>
+    function getPrevMonth(date: any) {
+      const month = date.getMonth();
+      return {
+        year: month === 0 ? date.getFullYear() - 1 : date.getFullYear(),
+        month: month === 0 ? 12 : month,
+      };
+    }
+    const generateDateList = (count: number) =>
       Array.from({ length: count }, (_, i) => {
         const time = now - (count - i - 1) * oneDay;
         return this.getDateType(new Date(time), format);
@@ -784,8 +788,32 @@ class ZZTOOL {
       return generateDateList(step);
     }
 
-
     return [];
+  }
+  /**
+   * 获取时间段
+   * @param {*} start 开始时间
+   * @param {*} end 结束时间
+   * @param {*} step 步长
+   * @returns
+   */
+  getTimeStep(start:string, end:string, step = "01:00") {
+    const [startHour, startMinute] = start.split(":").map(Number);
+    const [endHour, endMinute] = end.split(":").map(Number);
+    const [stepHour, stepMinute] = step.split(":").map(Number);
+
+    const startTime = startHour * 60 + startMinute;
+    const endTime = endHour * 60 + endMinute;
+    const stepTime = stepHour * 60 + stepMinute;
+
+    const result = [];
+    for (let time = startTime; time <= endTime; time += stepTime) {
+        const hour = String(Math.floor(time / 60)).padStart(2, '0');
+        const minute = String(time % 60).padStart(2, '0');
+        result.push(`${hour}:${minute}`);
+    }
+
+    return result;
   }
 }
 export default ZZTOOL;

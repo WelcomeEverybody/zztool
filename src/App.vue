@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { ref, inject, onMounted, watch, compile } from 'vue'
+import { inject } from 'vue'
 import ZZTOOL from '../lib/index'
 
-
 const zztool: ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
-const is = zztool.getDateList(new Date(), 4,false,10);
-
+const is = zztool.getTimeStep("20:00","24:00","00:15");
 console.log(is)
-
 </script>
 
 <template>

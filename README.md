@@ -8,6 +8,7 @@ js 工具库 操作数据，数据对比等等
 
 * getBetweenDate
 * getDateList
+* getTimeStep
 
 # 1.1.0
 
