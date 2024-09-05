@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
 const zztool = inject('$ZZTOOL');
-const is = zztool.regIdcard("41088120001005855");
+const is = zztool.getDateList('2024-3-1', 3);
 console.log(is);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
@@ -14,9 +14,12 @@ function __VLS_template() {
     let __VLS_localComponents;
     let __VLS_components;
     let __VLS_styleScopedClasses;
+    // CSS variable injection 
+    // CSS variable injection end 
     let __VLS_resolvedLocalAndGlobalComponents;
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({});
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("container") }, });
     if (typeof __VLS_styleScopedClasses === 'object' && !Array.isArray(__VLS_styleScopedClasses)) {
+        __VLS_styleScopedClasses['container'];
     }
     var __VLS_slots;
     return __VLS_slots;

@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.1.1";
+const version = "1.1.2";
 class ZZTOOL {
   static instance: any = null;
   version: string;
@@ -740,19 +740,12 @@ class ZZTOOL {
    */
   getDateList(date: any, type: number, hasNow = true, step = NaN) {
     if (!date) return [];
-
-    const types = {
-      1: 3,
-      2: 7,
-    };
     const format = "Y-M-D";
     const oneDay = 24 * 60 * 60 * 1000;
-    let now = Date.now();
-
+    let now = new Date(date).getTime();
     if (!hasNow) {
       now -= oneDay;
     }
-
     // helper function
     function getPrevMonth(date: any) {
       const month = date.getMonth();
@@ -768,15 +761,16 @@ class ZZTOOL {
       });
 
     // start
-    const { year, month, day } = this.getDateInfo(now);
-
+    const { year, month, day } = this.getDateInfo(date);
     if (type && !step) {
       switch (type) {
         case 1:
+          return generateDateList(3);
         case 2:
-          return generateDateList(types[type]);
+          return generateDateList(7);
         case 3:
-          const { year: prevYear, month: prevMonth } = getPrevMonth(new Date());
+          const { year: prevYear, month: prevMonth } = getPrevMonth(new Date(now));
+          console.log(prevMonth)
           return this.getBetwenDate(`${prevYear}-${prevMonth}-${day}`, now);
         case 4:
           return this.getBetwenDate(
@@ -797,7 +791,7 @@ class ZZTOOL {
    * @param {*} step 步长
    * @returns
    */
-  getTimeStep(start:string, end:string, step = "01:00") {
+  getTimeStep(start: string, end: string, step = "01:00") {
     const [startHour, startMinute] = start.split(":").map(Number);
     const [endHour, endMinute] = end.split(":").map(Number);
     const [stepHour, stepMinute] = step.split(":").map(Number);
@@ -808,9 +802,9 @@ class ZZTOOL {
 
     const result = [];
     for (let time = startTime; time <= endTime; time += stepTime) {
-        const hour = String(Math.floor(time / 60)).padStart(2, '0');
-        const minute = String(time % 60).padStart(2, '0');
-        result.push(`${hour}:${minute}`);
+      const hour = String(Math.floor(time / 60)).padStart(2, "0");
+      const minute = String(time % 60).padStart(2, "0");
+      result.push(`${hour}:${minute}`);
     }
 
     return result;

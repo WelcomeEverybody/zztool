@@ -1,7 +1,7 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.2",
   "type": "module",
   "main": "./lib/index.js",
   "module": "./dist/zztool.umd.cjs",
@@ -16,6 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/Czhangzihao/zztool"
   },
+  "homepage": "// https://czhangzihao.github.io/zztool/",
+  
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",

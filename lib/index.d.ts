@@ -182,7 +182,7 @@ declare class ZZTOOL {
      */
     getWeekTime(date?: Date): string[];
     /**
-     * 获取日期是星期几
+     * 获取月份天数
      * @param {*} date
      * @returns
      */
@@ -204,5 +204,29 @@ declare class ZZTOOL {
      * @returns
      */
     getYearWeeks(year?: number): number;
+    /**
+     * 获取两个日期之前的日期
+     * @param {*} date
+     * @param {*} date1
+     */
+    getBetwenDate(date: any, date1: any): string[];
+    /**
+     * 获取某日期的近期天数
+     * @param {*} date 日期
+     * @param {*} type （三天，周，月，年）
+     * @param {*} hasNow 生成的日期是否包含今日
+     * @param {*} step 生成距离date的step天
+     * @returns
+     * step优先级大于type
+     */
+    getDateList(date: any, type: number, hasNow?: boolean, step?: number): string[];
+    /**
+     * 获取时间段
+     * @param {*} start 开始时间
+     * @param {*} end 结束时间
+     * @param {*} step 步长
+     * @returns
+     */
+    getTimeStep(start: string, end: string, step?: string): string[];
 }
 export default ZZTOOL;

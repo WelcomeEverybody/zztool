@@ -3,7 +3,7 @@ import { inject } from 'vue'
 import ZZTOOL from '../lib/index'
 
 const zztool: ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
-const is = zztool.getTimeStep("20:00","24:00","00:15");
+const is = zztool.getDateList('2024-3-1',3);
 console.log(is)
 </script>
 

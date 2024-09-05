@@ -1,7 +1,5 @@
 import { ref } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-let __VLS_typeProps;
-const __VLS_props = defineProps();
 const count = ref(0);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
@@ -18,9 +16,6 @@ function __VLS_template() {
     // CSS variable injection end 
     let __VLS_resolvedLocalAndGlobalComponents;
     __VLS_elementAsFunction(__VLS_intrinsicElements.h1, __VLS_intrinsicElements.h1)({});
-    (__VLS_ctx.msg);
-    // @ts-ignore
-    [msg,];
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("card") }, });
     __VLS_elementAsFunction(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)({ ...{ onClick: (...[$event]) => {
                 __VLS_ctx.count++;
@@ -52,13 +47,11 @@ function __VLS_template() {
                 count: count,
             };
         },
-        props: {},
     });
 }
 export default (await import('vue')).defineComponent({
     setup() {
         return {};
     },
-    props: {},
 });
 ;

@@ -2,6 +2,14 @@
 
 js 工具库 操作数据，数据对比等等
 
+# 1.1.2
+
+增加[文档](https://czhangzihao.github.io/zztool/)
+
+修复方法
+
+* getDateList
+
 # 1.1.1
 
 增加方法
