@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/Czhangzihao/zztool"
   },
-  "homepage": "// https://czhangzihao.github.io/zztool/",
+  "homepage": "https://czhangzihao.github.io/zztool/",
   
   "scripts": {
     "dev": "vite",
