@@ -171,7 +171,6 @@ class ZZTOOL {
     const checkCodes = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"];
     let sum = 0;
     for (let i = 0; i < 17; i++) {
-      console.log(str[i], weights[i]);
       sum += this.toNumber(str[i]) * weights[i];
     }
     const calculatedCheckCode = checkCodes[sum % 11];
@@ -770,7 +769,6 @@ class ZZTOOL {
           return generateDateList(7);
         case 3:
           const { year: prevYear, month: prevMonth } = getPrevMonth(new Date(now));
-          console.log(prevMonth)
           return this.getBetwenDate(`${prevYear}-${prevMonth}-${day}`, now);
         case 4:
           return this.getBetwenDate(
