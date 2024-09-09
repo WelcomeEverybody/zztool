@@ -1,53 +1,49 @@
-[MIT](https://github.com/Czhangzihao/zztool/blob/main/LICENSE)
+[MIT](https://github.com/Czhangzihao/zztool/blob/main/LICENSE)     [文档地址](https://czhangzihao.github.io/zztool/)
 
 js 工具库 操作数据，数据对比等等
+
+# 1.1.3
+
+| 优化      | col2 | col3 |
+| --------- | ---- | ---- |
+| dataEmpty |      |      |
+| dataEqual |      |      |
 
 # 1.1.2
 
 增加[文档](https://czhangzihao.github.io/zztool/)
 
-修复方法
-
-* getDateList
+| 修复        |
+| ----------- |
+| getDateList |
 
 # 1.1.1
 
-增加方法
-
-* getBetweenDate
-* getDateList
-* getTimeStep
+| 增加           |
+| -------------- |
+| getBetweenDate |
+| getDateList    |
+| getTimeStep    |
 
 # 1.1.0
 
-修复
-
-* regIdcard
+| 修复      |
+| --------- |
+| regIdcard |
 
 # 1.0.8
 
-增加方法
-
-* getMonthDays
-* getWeekDay
-* weekInMonthCount
-* getYearWeeks
-
-优化方法
-
-* getDate
-* getDateType
+| 优化        | 增加             |
+| ----------- | ---------------- |
+| getDate     | getWeekDay       |
+| getDateType | getMonthDays     |
+|             | weekInMonthCount |
+|             | getYearWeeks     |
 
 # 1.0.7
 
-增加方法
-
-* getUrlParam
-* paramFormat
-* getWeekTime
-
-优化方法
-
-* toBoolean
-* toArray
-* getDateType
+| 优化        | 增加        |
+| ----------- | ----------- |
+| toBoolean   | getUrlParam |
+| toArray     | paramFormat |
+| getDateType | getWeekTime |

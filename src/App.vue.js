@@ -1,7 +1,47 @@
 import { inject } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
 const zztool = inject('$ZZTOOL');
-const is = zztool.getDateList('2024-3-1', 3);
+const complexObj = {
+    name: '',
+    age: 25,
+    address: {
+        city: null,
+        postalCode: '',
+        details: {
+            street: '',
+            number: 123
+        }
+    },
+    job: undefined,
+    hobbies: [],
+    preferences: {
+        colors: ['red', 'blue'],
+        emptyList: [],
+        emptyObject: {}
+    },
+    active: true
+};
+const complexObj1 = {
+    name: '',
+    age: 23,
+    address: {
+        city: null,
+        postalCode: '',
+        details: {
+            street: '',
+            number: 1
+        }
+    },
+    job: undefined,
+    hobbies: [],
+    preferences: {
+        colors: ['blue', 'blue'],
+        emptyList: [],
+        emptyObject: {}
+    },
+    active: true
+};
+const is = zztool.dataEqual(complexObj, complexObj1, true);
 console.log(is);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
@@ -17,7 +57,7 @@ function __VLS_template() {
     // CSS variable injection 
     // CSS variable injection end 
     let __VLS_resolvedLocalAndGlobalComponents;
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ ...{ class: ("container") }, });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(Object.assign({ class: ("container") }));
     if (typeof __VLS_styleScopedClasses === 'object' && !Array.isArray(__VLS_styleScopedClasses)) {
         __VLS_styleScopedClasses['container'];
     }

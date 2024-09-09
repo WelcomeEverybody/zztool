@@ -78,16 +78,17 @@ declare class ZZTOOL {
      * 以obj1为基准进行比对
      * @param {*} obj1
      * @param {*} obj2
-     * @param {boolean} returnIndex 是否返回不一致的索引
+     * @param {boolean} returnKeys  是否返回不一致的索引
      */
-    dataEqual(obj1: any, obj2: any, returnIndex?: boolean): any;
+    dataEqual(obj1: any, obj2: any, returnKeys?: boolean): boolean | Array<string>;
     /**
      * 判断对象中是否有空值
      * @param {*} obj
-     * @param {boolean} index 是否返回空值的索引
+     * @param {boolean} returnKeys 是否返回空值的索引
+     * @param {string} parentKey 父级key
      * @returns
      */
-    dataEmpty(obj: any, index?: boolean): any;
+    dataEmpty(obj: any, returnKeys?: boolean, parentKey?: string): Array<string> | boolean;
     /**
      * 深克隆
      * @param {*} obj

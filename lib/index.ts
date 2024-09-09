@@ -328,82 +328,90 @@ class ZZTOOL {
    * 以obj1为基准进行比对
    * @param {*} obj1
    * @param {*} obj2
-   * @param {boolean} returnIndex 是否返回不一致的索引
+   * @param {boolean} returnKeys  是否返回不一致的索引
    */
-  dataEqual(obj1: any, obj2: any, returnIndex: boolean = false) {
-    const type1 = this.getType(obj1);
-    const type2 = this.getType(obj2);
-    if (type1 !== type2) {
-      return false;
+  dataEqual(obj1: any, obj2: any, returnKeys: boolean = false):boolean|Array<string> {
+    const differingKeys: Array<string> = [];
+    function isObject(value: any) {
+      return value && typeof value === "object" && !Array.isArray(value);
     }
-    if (!returnIndex) {
-      return JSON.stringify(obj1) === JSON.stringify(obj2);
-    }
-    function diffObjects(obj1: any, obj2: any) {
-      const differences: any = {};
-      const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
-      for (const key of keys) {
-        if (obj1[key] !== obj2[key]) {
-          // 如果值不相同，且值之一是对象，则递归调用 diffObjects
-          if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
-            const nestedDiff = diffObjects(obj1[key], obj2[key]);
-            if (Object.keys(nestedDiff).length > 0) {
-              differences[key] = nestedDiff;
-            }
-          } else {
-            differences[key] = {
-              oldValue: obj1[key] ? obj1[key] : "",
-              newValue: obj2[key] ? obj2[key] : "",
-            };
-          }
+    const deepCompare = (value1: any, value2: any, key: string) => {
+      if (isObject(value1) && isObject(value2)) {
+        const data = this.dataEqual(value1, value2, returnKeys);
+        if(Array.isArray(data)){
+          data.forEach((k:any) =>
+            differingKeys.push(`${key}.${k}`)
+          );
         }
       }
-      return differences;
+      if (Array.isArray(value1) && Array.isArray(value2)) {
+        if (
+          value1.length !== value2.length ||
+          value1.some((v, i) => v !== value2[i])
+        ) {
+          differingKeys.push(key);
+        }
+        return;
+      }
+      if (value1 !== value2) {
+        differingKeys.push(key);
+      }
     }
-    return diffObjects(obj1, obj2);
+    for (let key in obj1) {
+      if (obj1.hasOwnProperty(key)) {
+        const value1 = obj1[key];
+        const value2 = obj2[key];
+        deepCompare(value1, value2, key);
+      }
+    }
+    return returnKeys ? differingKeys : differingKeys.length > 0;
   }
   /**
    * 判断对象中是否有空值
    * @param {*} obj
-   * @param {boolean} index 是否返回空值的索引
+   * @param {boolean} returnKeys 是否返回空值的索引
+   * @param {string} parentKey 父级key
    * @returns
    */
-  dataEmpty(obj: any, index: boolean = false) {
-    if (
-      obj == null ||
-      obj == undefined ||
-      this.toString(obj) === "{}" ||
-      this.toString(obj) === "[]"
-    )
-      return true;
-    const that = this;
-    const EmptyIndex: any = {};
-    function empty(obj: any) {
-      for (const key in obj) {
+  dataEmpty(
+    obj: any,
+    returnKeys = false,
+    parentKey = ""
+  ): Array<string> | boolean {
+    const emptyKeys: string[] = [];
+
+    function checkEmpty(value: any): boolean {
+      return (
+        value === "" ||
+        value === null ||
+        value === undefined ||
+        (typeof value === "object" &&
+          value !== null &&
+          (Array.isArray(value)
+            ? value.length === 0
+            : Object.keys(value).length === 0))
+      );
+    }
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const fullKey = parentKey ? `${parentKey}.${key}` : key;
         const value = obj[key];
-        if (
-          value === "" ||
-          value == null ||
-          value == undefined ||
-          that.toString(value) === "{}" ||
-          that.toString(value) === "[]"
-        ) {
-          if (index) {
-            EmptyIndex[key] = value;
-          } else {
-            return true;
+        if (typeof value === "object" && value !== null && !checkEmpty(value)) {
+          const nestedResult = this.dataEmpty(value, true, fullKey);
+          if (Array.isArray(nestedResult)) {
+            emptyKeys.push(...nestedResult);
           }
-        } else if (that.isObject(value) || that.isArray(value)) {
-          return empty(value);
+        } else if (checkEmpty(value)) {
+          emptyKeys.push(fullKey);
         }
       }
-      return false;
     }
-    const hasEmpty = empty(obj);
-    if (index) {
-      return this.toString(EmptyIndex) === "{}" ? false : EmptyIndex;
+
+    if (returnKeys) {
+      return emptyKeys;
     }
-    return hasEmpty;
+
+    return emptyKeys.length > 0;
   }
   /**
    * 深克隆
@@ -584,6 +592,7 @@ class ZZTOOL {
    */
   getDateInfo(str: any) {
     let strs = str;
+    // 兼容ios
     if (this.isString(str) && this.regIsHas(str, "-")) {
       strs = str.replaceAll("-", "/");
     }
@@ -768,7 +777,9 @@ class ZZTOOL {
         case 2:
           return generateDateList(7);
         case 3:
-          const { year: prevYear, month: prevMonth } = getPrevMonth(new Date(now));
+          const { year: prevYear, month: prevMonth } = getPrevMonth(
+            new Date(now)
+          );
           return this.getBetwenDate(`${prevYear}-${prevMonth}-${day}`, now);
         case 4:
           return this.getBetwenDate(
