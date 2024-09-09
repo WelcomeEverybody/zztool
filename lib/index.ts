@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.1.2";
+const version = "1.1.3";
 class ZZTOOL {
   static instance: any = null;
   version: string;
@@ -10,14 +10,14 @@ class ZZTOOL {
   constructor() {
     this.version = version;
     this.v = version;
+    if (ZZTOOL.instance) {
+      return ZZTOOL.instance;
+    }
     console.log(
       "%czztoll%c" + `V${this.v}`,
       "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
       "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px"
     );
-    if (ZZTOOL.instance) {
-      return ZZTOOL.instance;
-    }
     return (ZZTOOL.instance = this);
   }
   /**

@@ -4,10 +4,10 @@ js 工具库 操作数据，数据对比等等
 
 # 1.1.3
 
-| 优化      | col2 | col3 |
-| --------- | ---- | ---- |
-| dataEmpty |      |      |
-| dataEqual |      |      |
+| 优化      |
+| --------- |
+| dataEmpty |
+| dataEqual | 
 
 # 1.1.2
 
@@ -47,3 +47,4 @@ js 工具库 操作数据，数据对比等等
 | toBoolean   | getUrlParam |
 | toArray     | paramFormat |
 | getDateType | getWeekTime |
+
