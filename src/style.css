@@ -1,0 +1,13 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+.w-full{
+  width: 100%;
+}
+.h-full{
+  height: 100%;
+}
+.h-50{
+  height: 50%;
+}
