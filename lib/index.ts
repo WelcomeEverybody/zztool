@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.1.3";
+const version = "1.1.4";
 class ZZTOOL {
   static instance: any = null;
   version: string;
@@ -209,7 +209,10 @@ class ZZTOOL {
   /**
    * 参数获取
    */
-  getUrlParam(url: string) {
+  getUrlParam(url = '') {
+    if(!url){
+      url = window.location.href;
+    }
     return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
       (a: any, v) => (
         (a[v.slice(0, v.indexOf("="))] = v.slice(v.indexOf("=") + 1)), a
@@ -589,6 +592,8 @@ class ZZTOOL {
   }
   /**
    * -----日期
+   * @param date
+   * @returns {year,month,day,hour,minute,second}
    */
   getDateInfo(str: any) {
     let strs = str;
@@ -631,7 +636,10 @@ class ZZTOOL {
    * @param type
    * @returns
    */
-  getDate(str: any, type = "Y/M/D h:m:s") {
+  getDate(str:any = "", type = "Y/M/D h:m:s") {
+    if(arguments.length === 0){
+      return this.getDateType(this.getDateInfo(new Date()), "Y/M/D h:m:s");
+    }
     if (arguments.length === 1) {
       return this.getDateType(this.getDateInfo(new Date()), str);
     }
@@ -818,5 +826,20 @@ class ZZTOOL {
 
     return result;
   }
+  /**
+   * -----计算
+   */
+  /**
+   * 计算百分比
+   * @param {*} part
+   * @param {*} total
+   * @param {*} decimalPlaces
+   * @returns
+   */
+  calculatePercentage(part:number, total:number, decimalPlaces = 2) {
+    if (total === 0) return 0;
+    return ((part / total) * 100).toFixed(decimalPlaces);
+  }
+
 }
 export default ZZTOOL;

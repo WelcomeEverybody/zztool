@@ -45,7 +45,7 @@ declare class ZZTOOL {
     /**
      * 参数获取
      */
-    getUrlParam(url: string): any;
+    getUrlParam(url?: string): any;
     paramformat(obj: any, type?: string): string | FormData | undefined;
     /**
      * -----转类型
@@ -153,6 +153,8 @@ declare class ZZTOOL {
     dataFindValues(str: string, data: any[], key: string, nestedKey?: string): any[];
     /**
      * -----日期
+     * @param date
+     * @returns {year,month,day,hour,minute,second}
      */
     getDateInfo(str: any): {
         year: any;
@@ -175,7 +177,7 @@ declare class ZZTOOL {
      * @param type
      * @returns
      */
-    getDate(str: any, type?: string): string;
+    getDate(str?: any, type?: string): string;
     /**
      * date不为空时获取date的周日期
      * @param {*} date
@@ -229,5 +231,16 @@ declare class ZZTOOL {
      * @returns
      */
     getTimeStep(start: string, end: string, step?: string): string[];
+    /**
+     * -----计算
+     */
+    /**
+     * 计算百分比
+     * @param {*} part
+     * @param {*} total
+     * @param {*} decimalPlaces
+     * @returns
+     */
+    calculatePercentage(part: number, total: number, decimalPlaces?: number): string | 0;
 }
 export default ZZTOOL;

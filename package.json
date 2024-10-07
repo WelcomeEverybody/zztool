@@ -6,25 +6,35 @@
   "main": "./lib/index.js",
   "module": "./dist/zztool.umd.cjs",
   "typings": "./lib/index.d.ts",
-  "license":"MIT",
+  "license": "MIT",
   "files": [
     "dist",
     "lib"
   ],
-  "keywords": ["zztool","javascript","js","utils"],
+  "keywords": [
+    "zztool",
+    "javascript",
+    "js",
+    "utils"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Czhangzihao/zztool"
   },
   "homepage": "https://czhangzihao.github.io/zztool/",
-  
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "vue": "^3.4.31"
   },
   "devDependencies": {
+    "@types/node": "^22.1.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4",
+    "vue-tsc": "^2.0.24"
   }
 }
