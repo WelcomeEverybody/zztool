@@ -5,10 +5,11 @@ js 工具库 操作数据，数据对比等等
 # 1.1.4
 
 
-| 增加                | 优化        |
-| ------------------- | ----------- |
-| calculatePercentage | getUrlParam |
-|                     | getDate     |
+| 增加                | 优化           |
+| ------------------- | -------------- |
+| calculatePercentage | getUrlParam    |
+| shuffleArray        | getDate        |
+|                     | getBetweenDate |
 
 # 1.1.3
 

@@ -289,6 +289,20 @@ class ZZTOOL {
     }
     return arr;
   }
+  /**
+   * 随机打乱数组
+   * @param arr 
+   * @returns 
+   */
+  shuffleArray(array: any[]){
+    if(!Array.isArray(array)) return array;
+    let arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
   getRandomColor() {
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
   }
@@ -731,20 +745,32 @@ class ZZTOOL {
    * 获取两个日期之前的日期
    * @param {*} date
    * @param {*} date1
+   * @param {*} days
    */
-  getBetwenDate(date: any, date1: any) {
+  getBetweenDate(date: any, date1: any,days = false) {
     // 一天的时间戳
     const oneDay = 24 * 60 * 60 * 1000;
     const dateTime = new Date(date).getTime();
     const dateTime1 = new Date(date1).getTime();
+    
+    if(days){
+      let day = 0;
+      for (let i = 0; i <= Math.abs(dateTime - dateTime1) / oneDay; i++) {
+        day += 1;
+      }
+      return day;
+    }
     const list = [];
-    for (let i = 0; i < Math.abs(dateTime - dateTime1) / oneDay; i++) {
+    for (let i = 0; i <= Math.abs(dateTime - dateTime1) / oneDay; i++) {
       const time =
         dateTime > dateTime1 ? dateTime - i * oneDay : dateTime + i * oneDay;
       list.push(this.getDate(new Date(time), "Y-M-D"));
     }
     return list;
   }
+  /**
+   * 
+   */
   /**
    * 获取某日期的近期天数
    * @param {*} date 日期
@@ -788,9 +814,9 @@ class ZZTOOL {
           const { year: prevYear, month: prevMonth } = getPrevMonth(
             new Date(now)
           );
-          return this.getBetwenDate(`${prevYear}-${prevMonth}-${day}`, now);
+          return this.getBetweenDate(`${prevYear}-${prevMonth}-${day}`, now);
         case 4:
-          return this.getBetwenDate(
+          return this.getBetweenDate(
             `${year - 1}/${month}/${day}`,
             `${year}/${month}/${day}`
           );

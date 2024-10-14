@@ -59,6 +59,12 @@ declare class ZZTOOL {
      */
     getRandom(min: number, max: number): number;
     getRandomArray(length: number, min: number, max: number): number[];
+    /**
+     * 随机打乱数组
+     * @param arr
+     * @returns
+     */
+    shuffleArray(array: any[]): any[];
     getRandomColor(): string;
     getRandomRGBColor(): string;
     getRandomRGBA(): string;
@@ -211,8 +217,12 @@ declare class ZZTOOL {
      * 获取两个日期之前的日期
      * @param {*} date
      * @param {*} date1
+     * @param {*} days
      */
-    getBetwenDate(date: any, date1: any): string[];
+    getBetweenDate(date: any, date1: any, days?: boolean): number | string[];
+    /**
+     *
+     */
     /**
      * 获取某日期的近期天数
      * @param {*} date 日期
@@ -222,7 +232,7 @@ declare class ZZTOOL {
      * @returns
      * step优先级大于type
      */
-    getDateList(date: any, type: number, hasNow?: boolean, step?: number): string[];
+    getDateList(date: any, type: number, hasNow?: boolean, step?: number): number | string[];
     /**
      * 获取时间段
      * @param {*} start 开始时间
