@@ -214,7 +214,7 @@ declare class ZZTOOL {
      */
     getYearWeeks(year?: number): number;
     /**
-     * 获取两个日期之前的日期
+     * 获取两个日期之间的日期
      * @param {*} date
      * @param {*} date1
      * @param {*} days

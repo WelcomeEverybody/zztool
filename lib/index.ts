@@ -14,7 +14,7 @@ class ZZTOOL {
       return ZZTOOL.instance;
     }
     console.log(
-      "%czztoll%c" + `V${this.v}`,
+      "%czztool%c" + `V${this.v}`,
       "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
       "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px"
     );
@@ -742,7 +742,7 @@ class ZZTOOL {
     return week;
   }
   /**
-   * 获取两个日期之前的日期
+   * 获取两个日期之间的日期
    * @param {*} date
    * @param {*} date1
    * @param {*} days
@@ -754,11 +754,7 @@ class ZZTOOL {
     const dateTime1 = new Date(date1).getTime();
     
     if(days){
-      let day = 0;
-      for (let i = 0; i <= Math.abs(dateTime - dateTime1) / oneDay; i++) {
-        day += 1;
-      }
-      return day;
+      return Math.abs(dateTime - dateTime1) / oneDay;
     }
     const list = [];
     for (let i = 0; i <= Math.abs(dateTime - dateTime1) / oneDay; i++) {
