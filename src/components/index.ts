@@ -31,8 +31,10 @@ import {default as getMonthDays} from "./getMonthDays.vue";
 import {default as getBetwenDate} from "./getBetwenDate.vue";
 import {default as getDateList} from "./getDateList.vue";
 import {default as getTimeStep} from "./getTimeStep.vue";
+import {default as shuffleArray} from "./shuffleArray.vue"
 
 export {
+    shuffleArray,
     getVersion,
     error,
     debounce,

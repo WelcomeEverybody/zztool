@@ -15,7 +15,7 @@ console.log(param) // {a: '1', b: '2'}
   const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
 
   const url = "http://www.baidu.com?a=1&b=2";
-  const param = zztool.getUrlParam(url);
+  const param = zztool.getUrlParam(url); // 无参数则会获取url
   console.log(param) // {a: '1', b: '2'}
 </script>
 </textarea>

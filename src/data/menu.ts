@@ -37,6 +37,7 @@ export default [
         {name:"取交/并/差/补",title:"dataMerge",com:"dataMerge"},
         {name:"数组去重",title:"dataUnique",com:"dataUnique"},
         {name:"数组去空",title:"dataUnEmpty",com:"dataUnEmpty"},
+        {name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
         {name:"dataFindValues",title:"dataFindValues",com:"dataFindValues"},
     ]},
     {name:'日期',list:[

@@ -3,6 +3,7 @@ import { shallowRef, onMounted, ref } from "vue";
 import MoveBtn from "./components/moveBtn.vue";
 import Menu from "./components/menu.vue";
 import {
+  shuffleArray,
   getVersion,
   error,
   debounce,
@@ -72,6 +73,7 @@ const map: any = {
   "getBetwenDate": getBetwenDate,
   "getDateList": getDateList,
   "getTimeStep": getTimeStep,
+  "shuffleArray": shuffleArray
 }
 const menuChangeFn = (item: any) => {
   console.log(`%c${item.title}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px")
