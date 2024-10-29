@@ -1,5 +1,5 @@
 declare class ZZTOOL {
-    static instance: any;
+    static instance: ZZTOOL;
     version: string;
     v: string;
     constructor();
@@ -8,8 +8,8 @@ declare class ZZTOOL {
      */
     getVersion(): string;
     error(msg: string): void;
-    debounce: (callback: Function, wait?: number) => void;
-    throttle: (callback: Function, wait?: number) => void;
+    debounce: (callback: () => {}, wait?: number) => void;
+    throttle: (callback: () => {}, wait?: number) => void;
     /**
      * -----类型检测
      */
@@ -59,6 +59,13 @@ declare class ZZTOOL {
      */
     getRandom(min: number, max: number): number;
     getRandomArray(length: number, min: number, max: number): number[];
+    /**
+     * 随机获取字符串
+     * @param {number} length 长度
+     * @param {string} charStr 自定义字符
+     * @returns
+     */
+    getRandomString(length?: number, charStr?: string): string;
     /**
      * 随机打乱数组
      * @param arr

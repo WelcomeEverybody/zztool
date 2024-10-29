@@ -2,9 +2,9 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.1.4";
+const version = "1.1.5";
 class ZZTOOL {
-  static instance: any = null;
+  static instance: ZZTOOL;
   version: string;
   v: string;
   constructor() {
@@ -32,7 +32,7 @@ class ZZTOOL {
   // 防抖
   debounce = (() => {
     let timer: any = null;
-    return (callback: Function, wait = 800) => {
+    return (callback: () => {}, wait = 800) => {
       timer && clearTimeout(timer);
       timer = setTimeout(callback, wait);
     };
@@ -40,7 +40,7 @@ class ZZTOOL {
   // 节流
   throttle = (() => {
     let last = 0;
-    return (callback: Function, wait = 800) => {
+    return (callback: () => {}, wait = 800) => {
       let now = +new Date();
       if (now - last > wait) {
         callback();
@@ -288,6 +288,20 @@ class ZZTOOL {
       arr.push(this.getRandom(min, max));
     }
     return arr;
+  }
+  /**
+   * 随机获取字符串
+   * @param {number} length 长度
+   * @param {string} charStr 自定义字符
+   * @returns 
+   */
+  getRandomString(length: number = 32, charStr = '') {
+    const chars = charStr ? charStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
+    let str = "";
+    for (let i = 0; i < length; i++) {
+      str += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return str;
   }
   /**
    * 随机打乱数组
