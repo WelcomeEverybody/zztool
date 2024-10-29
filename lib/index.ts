@@ -209,8 +209,8 @@ class ZZTOOL {
   /**
    * 参数获取
    */
-  getUrlParam(url = '') {
-    if(!url){
+  getUrlParam(url = "") {
+    if (!url) {
       url = window.location.href;
     }
     return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
@@ -293,10 +293,12 @@ class ZZTOOL {
    * 随机获取字符串
    * @param {number} length 长度
    * @param {string} charStr 自定义字符
-   * @returns 
+   * @returns
    */
-  getRandomString(length: number = 32, charStr = '') {
-    const chars = charStr ? charStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
+  getRandomString(length: number = 32, charStr = "") {
+    const chars = charStr
+      ? charStr
+      : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
     let str = "";
     for (let i = 0; i < length; i++) {
       str += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -305,15 +307,15 @@ class ZZTOOL {
   }
   /**
    * 随机打乱数组
-   * @param arr 
-   * @returns 
+   * @param arr
+   * @returns
    */
-  shuffleArray(array: any[]){
-    if(!Array.isArray(array)) return array;
+  shuffleArray(array: any[]) {
+    if (!Array.isArray(array)) return array;
     let arr = array.slice();
     for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
   }
@@ -361,7 +363,11 @@ class ZZTOOL {
    * @param {*} obj2
    * @param {boolean} returnKeys  是否返回不一致的索引
    */
-  dataEqual(obj1: any, obj2: any, returnKeys: boolean = false):boolean|Array<string> {
+  dataEqual(
+    obj1: any,
+    obj2: any,
+    returnKeys: boolean = false
+  ): boolean | Array<string> {
     const differingKeys: Array<string> = [];
     function isObject(value: any) {
       return value && typeof value === "object" && !Array.isArray(value);
@@ -369,10 +375,8 @@ class ZZTOOL {
     const deepCompare = (value1: any, value2: any, key: string) => {
       if (isObject(value1) && isObject(value2)) {
         const data = this.dataEqual(value1, value2, returnKeys);
-        if(Array.isArray(data)){
-          data.forEach((k:any) =>
-            differingKeys.push(`${key}.${k}`)
-          );
+        if (Array.isArray(data)) {
+          data.forEach((k: any) => differingKeys.push(`${key}.${k}`));
         }
       }
       if (Array.isArray(value1) && Array.isArray(value2)) {
@@ -387,7 +391,7 @@ class ZZTOOL {
       if (value1 !== value2) {
         differingKeys.push(key);
       }
-    }
+    };
     for (let key in obj1) {
       if (obj1.hasOwnProperty(key)) {
         const value1 = obj1[key];
@@ -664,8 +668,8 @@ class ZZTOOL {
    * @param type
    * @returns
    */
-  getDate(str:any = "", type = "Y/M/D h:m:s") {
-    if(arguments.length === 0){
+  getDate(str: any = "", type = "Y/M/D h:m:s") {
+    if (arguments.length === 0) {
       return this.getDateType(this.getDateInfo(new Date()), "Y/M/D h:m:s");
     }
     if (arguments.length === 1) {
@@ -761,13 +765,13 @@ class ZZTOOL {
    * @param {*} date1
    * @param {*} days
    */
-  getBetweenDate(date: any, date1: any,days = false) {
+  getBetweenDate(date: any, date1: any, days = false) {
     // 一天的时间戳
     const oneDay = 24 * 60 * 60 * 1000;
     const dateTime = new Date(date).getTime();
     const dateTime1 = new Date(date1).getTime();
-    
-    if(days){
+
+    if (days) {
       return Math.abs(dateTime - dateTime1) / oneDay;
     }
     const list = [];
@@ -779,7 +783,7 @@ class ZZTOOL {
     return list;
   }
   /**
-   * 
+   *
    */
   /**
    * 获取某日期的近期天数
@@ -790,7 +794,7 @@ class ZZTOOL {
    * @returns
    * step优先级大于type
    */
-  getDateList(date: any, type: number, hasNow = true, step = NaN) {
+  getDateList(date: Date, type: number, hasNow = true, step = NaN) {
     if (!date) return [];
     const format = "Y-M-D";
     const oneDay = 24 * 60 * 60 * 1000;
@@ -799,7 +803,7 @@ class ZZTOOL {
       now -= oneDay;
     }
     // helper function
-    function getPrevMonth(date: any) {
+    function getPrevMonth(date: Date) {
       const month = date.getMonth();
       return {
         year: month === 0 ? date.getFullYear() - 1 : date.getFullYear(),
@@ -816,20 +820,24 @@ class ZZTOOL {
     const { year, month, day } = this.getDateInfo(date);
     if (type && !step) {
       switch (type) {
-        case 1:
+        case 1: {
           return generateDateList(3);
-        case 2:
+        }
+        case 2: {
           return generateDateList(7);
-        case 3:
+        }
+        case 3: {
           const { year: prevYear, month: prevMonth } = getPrevMonth(
             new Date(now)
           );
           return this.getBetweenDate(`${prevYear}-${prevMonth}-${day}`, now);
-        case 4:
+        }
+        case 4: {
           return this.getBetweenDate(
             `${year - 1}/${month}/${day}`,
             `${year}/${month}/${day}`
           );
+        }
       }
     } else if (step) {
       return generateDateList(step);
@@ -872,10 +880,9 @@ class ZZTOOL {
    * @param {*} decimalPlaces
    * @returns
    */
-  calculatePercentage(part:number, total:number, decimalPlaces = 2) {
+  calculatePercentage(part: number, total: number, decimalPlaces = 2) {
     if (total === 0) return 0;
     return ((part / total) * 100).toFixed(decimalPlaces);
   }
-
 }
 export default ZZTOOL;

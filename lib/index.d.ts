@@ -239,7 +239,7 @@ declare class ZZTOOL {
      * @returns
      * step优先级大于type
      */
-    getDateList(date: any, type: number, hasNow?: boolean, step?: number): number | string[];
+    getDateList(date: Date, type: number, hasNow?: boolean, step?: number): number | string[];
     /**
      * 获取时间段
      * @param {*} start 开始时间
