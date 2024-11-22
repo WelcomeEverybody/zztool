@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
 const zztool = inject('$ZZTOOL');
-console.log(zztool.getVersion());
+console.log(zztool.getTimeStep("00:00:00", "23:00:00"));
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
