@@ -247,7 +247,7 @@ declare class ZZTOOL {
      * @param {*} step 步长
      * @returns
      */
-    getTimeStep(start: string, end: string, step?: string): string[];
+    getTimeStep(start: string, end: string, step?: string, type?: string): string[];
     /**
      * -----计算
      */

@@ -8,3 +8,4 @@ widnows.zztool = new ZZTOOL();
 const app = createApp(App);
 app.provide("$ZZTOOL", new ZZTOOL());
 app.mount('#app');
+// test

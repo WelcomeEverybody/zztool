@@ -850,12 +850,13 @@ class ZZTOOL {
    * @param {*} start 开始时间
    * @param {*} end 结束时间
    * @param {*} step 步长
+   * @param {*} type hh:mm:ss hh:mm
    * @returns
    */
-  getTimeStep(start: string, end: string, step = "01:00:00") {
-    const [startHour, startMinute, startSecond] = start.split(":").map(Number);
-    const [endHour, endMinute, endSecond] = end.split(":").map(Number);
-    const [stepHour, stepMinute, stepSecond] = step.split(":").map(Number);
+  getTimeStep(start: string, end: string, step = "01:00",type="hh:mm") {
+    const [startHour, startMinute, startSecond = 0] = start.split(":").map(Number);
+    const [endHour, endMinute, endSecond = 0] = end.split(":").map(Number);
+    const [stepHour, stepMinute, stepSecond = 0] = step.split(":").map(Number);
   
     const startTime = startHour * 3600 + startMinute * 60 + startSecond;
     const endTime = endHour * 3600 + endMinute * 60 + endSecond;
@@ -866,7 +867,14 @@ class ZZTOOL {
       const hour = String(Math.floor(time / 3600)).padStart(2, "0");
       const minute = String(Math.floor((time % 3600) / 60)).padStart(2, "0");
       const second = String(time % 60).padStart(2, "0");
-      result.push(`${hour}:${minute}:${second}`);
+  
+      if (type === "hh:mm:ss") {
+        result.push(`${hour}:${minute}:${second}`);
+      } else if (type === "hh:mm") {
+        result.push(`${hour}:${minute}`);
+      } else {
+        throw new Error(`Unsupported type: ${type}`);
+      }
     }
   
     return result;
