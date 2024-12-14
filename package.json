@@ -19,9 +19,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Czhangzihao/zztool"
+    "url": "git+https://github.com/WelcomeEverybody/zztool"
   },
-  "homepage": "https://czhangzihao.github.io/zztool/",
+  "homepage": "https://welcomeeverybody.github.io/zztool/",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
