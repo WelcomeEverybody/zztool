@@ -370,8 +370,8 @@ class ZZTOOL {
     obj2: any,
     options = {}
   ): boolean | Array<string> {
-    const defaultOptions = { returnKeys: false, arrayDiff: false };
-    const { returnKeys, arrayDiff } = Object.assign(defaultOptions, options);
+    const defaultOptions = { returnKeys: false, arrayDiff: false }
+    const { returnKeys = false, arrayDiff = false } = Object.assign(defaultOptions, options);
 
     const differingKeys: Array<string> = [];
     function isObject(value: any) {

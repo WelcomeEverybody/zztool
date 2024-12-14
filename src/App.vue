@@ -22,7 +22,7 @@ const obj2 = {
   },
   f:[2,1]
 }
-console.log(zztool.dataEqual(obj,obj2,{returnKeys:true}))
+console.log(zztool.dataEqual(obj,obj2))
 </script>
 
 <template>
