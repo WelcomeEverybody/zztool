@@ -88,12 +88,14 @@ declare class ZZTOOL {
      */
     /**
      * 数据对比
-     * 以obj1为基准进行比对
      * @param {*} obj1
      * @param {*} obj2
-     * @param {boolean} returnKeys  是否返回不一致的索引
+     * @param {Object} options  配置
+     * @param {Boolean} options.returnKeys 是否返回不一致的key
+     * @param {Boolean} options.arrayDiff  是否返回数组差异
+     * @returns boolean | Array<string>
      */
-    dataEqual(obj1: any, obj2: any, returnKeys?: boolean): boolean | Array<string>;
+    dataEqual(obj1: any, obj2: any, options?: {}): boolean | Array<string>;
     /**
      * 判断对象中是否有空值
      * @param {*} obj
@@ -130,7 +132,7 @@ declare class ZZTOOL {
      * 差集：data1中有，data2中没有的值
      * 补集：两个数组中各自没有的值
      */
-    dataMerge(data1: any[], data2: any[], type?: number): any[] | undefined;
+    dataMerge(data1: any[], data2: any[], type?: number): any[];
     /**
      * 数组去重
      */
@@ -245,6 +247,7 @@ declare class ZZTOOL {
      * @param {*} start 开始时间
      * @param {*} end 结束时间
      * @param {*} step 步长
+     * @param {*} type hh:mm:ss hh:mm
      * @returns
      */
     getTimeStep(start: string, end: string, step?: string, type?: string): string[];

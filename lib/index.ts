@@ -358,37 +358,37 @@ class ZZTOOL {
    */
   /**
    * 数据对比
-   * 以obj1为基准进行比对
    * @param {*} obj1
    * @param {*} obj2
-   * @param {boolean} returnKeys  是否返回不一致的索引
+   * @param {Object} options  配置
+   * @param {Boolean} options.returnKeys 是否返回不一致的key
+   * @param {Boolean} options.arrayDiff  是否返回数组差异
+   * @returns boolean | Array<string>
    */
   dataEqual(
     obj1: any,
     obj2: any,
-    returnKeys: boolean = false
+    options = {}
   ): boolean | Array<string> {
+    const defaultOptions = { returnKeys: false, arrayDiff: false };
+    const { returnKeys, arrayDiff } = Object.assign(defaultOptions, options);
+
     const differingKeys: Array<string> = [];
     function isObject(value: any) {
       return value && typeof value === "object" && !Array.isArray(value);
     }
     const deepCompare = (value1: any, value2: any, key: string) => {
       if (isObject(value1) && isObject(value2)) {
-        const data = this.dataEqual(value1, value2, returnKeys);
+        const data = this.dataEqual(value1, value2, options);
         if (Array.isArray(data)) {
           data.forEach((k: any) => differingKeys.push(`${key}.${k}`));
         }
-      }
-      if (Array.isArray(value1) && Array.isArray(value2)) {
-        if (
-          value1.length !== value2.length ||
-          value1.some((v, i) => v !== value2[i])
-        ) {
-          differingKeys.push(key);
-        }
-        return;
-      }
-      if (value1 !== value2) {
+      }else if (Array.isArray(value1) && Array.isArray(value2)) {
+        const arraysDiffer = arrayDiff
+            ? value1.some((v, i) => v !== value2[i]) || value1.length !== value2.length
+            : value1.length !== value2.length || !value1.every((v) => value2.includes(v));
+        if (arraysDiffer) differingKeys.push(key);
+      }else if (value1 !== value2) {
         differingKeys.push(key);
       }
     };
@@ -532,6 +532,7 @@ class ZZTOOL {
           .filter((item) => !data2.includes(item))
           .concat(data2.filter((item) => !data1.includes(item)));
     }
+    return [];
   }
   /**
    * 数组去重
