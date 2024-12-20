@@ -1,11 +1,10 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import ZZTOOL from "../lib/index"
+import * as zztool from "../lib/index"
 // 挂在全局
 const widnows:any = window;
-widnows.zztool = new ZZTOOL();
+widnows.zztool = zztool;
+widnows.zz = zztool;
 const app = createApp(App);
-app.provide("$ZZTOOL",new ZZTOOL())
 app.mount('#app')
-// test

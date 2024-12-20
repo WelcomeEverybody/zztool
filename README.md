@@ -1,9 +1,70 @@
-[MIT](https://github.com/Czhangzihao/zztool/blob/main/LICENSE)     [文档地址](https://czhangzihao.github.io/zztool/)
+# @zzcpt/zztool js 工具库
 
-js 工具库 操作数据，数据对比等等
+## 简介
 
-# 1.1.5
+`@zzcpt/zztool` 是一个轻量级、高性能的前端工具库，旨在简化日常开发中的常见操作，提高开发效率。它提供了多种实用的工具函数，包括数据处理、数据校验、格式转换等。
 
+## 安装
+
+通过 npm 安装：
+
+```bash
+npm install @zzcpt/zztool
+```
+
+通过 yarn 安装：
+
+```bash
+yarn add @zzcpt/zztool
+```
+
+通过 pnpm 安装：
+
+```bash
+pnpm add @zzcpt/zztool
+```
+
+## 快速开始
+
+在项目中引入并使用：
+
+```javascript
+// 全部引入
+import * as zztool from '@zzcpt/zztool';
+
+// 按需引入
+import { debounce, throttle } from '@zzcpt/zztool';
+
+// 使用示例
+const debouncedFn = debounce(() => console.log('Debounced!'), 300);
+debouncedFn();
+```
+
+[MIT](https://github.com/WelcomeEverybody/zztool/blob/main/LICENSE)     [文档地址](https://welcomeeverybody.github.io/zztool/)
+
+## 贡献
+
+欢迎贡献代码或提交 Issue！
+
+GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
+
+## 许可证
+
+`@zzcpt/zztool` 遵循 MIT 许可证。
+
+# 更新日志
+
+## 1.2.1
+
+| 删除           | 增加 |
+| -------------- | -------------- |
+| dataFindValues | getTimeStamp |
+|                |
+
+1. 调整导出规则可以按需导入
+2. 删除isNumber,isNaN等方法
+
+## 1.1.5
 
 | 增加            | 优化        |
 | --------------- | ----------- |
@@ -21,8 +82,7 @@ js 工具库 操作数据，数据对比等等
 
 解决方法：1. every和includes优化数组对比并增加参数应对不同环境。2. 修改整体逻辑判断
 
-# 1.1.4
-
+## 1.1.4
 
 | 增加                | 优化           |
 | ------------------- | -------------- |
@@ -30,25 +90,22 @@ js 工具库 操作数据，数据对比等等
 | shuffleArray        | getDate        |
 |                     | getBetweenDate |
 
-# 1.1.3
-
+## 1.1.3
 
 | 优化      |
 | --------- |
 | dataEmpty |
 | dataEqual |
 
-# 1.1.2
+## 1.1.2
 
 增加[文档](https://czhangzihao.github.io/zztool/)
-
 
 | 修复        |
 | ----------- |
 | getDateList |
 
-# 1.1.1
-
+## 1.1.1
 
 | 增加           |
 | -------------- |
@@ -56,15 +113,13 @@ js 工具库 操作数据，数据对比等等
 | getDateList    |
 | getTimeStep    |
 
-# 1.1.0
-
+## 1.1.0
 
 | 修复      |
 | --------- |
 | regIdcard |
 
-# 1.0.8
-
+## 1.0.8
 
 | 优化        | 增加             |
 | ----------- | ---------------- |
@@ -73,11 +128,11 @@ js 工具库 操作数据，数据对比等等
 |             | weekInMonthCount |
 |             | getYearWeeks     |
 
-# 1.0.7
-
+## 1.0.7
 
 | 优化        | 增加        |
 | ----------- | ----------- |
 | toBoolean   | getUrlParam |
 | toArray     | paramFormat |
 | getDateType | getWeekTime |
+
