@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import {ref,onMounted,inject} from "vue";
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import {ref,onMounted} from "vue";
+import * as zztool from '@zzcpt/zztool';
 
 const btn = ref();
 const width = 120;
@@ -47,5 +46,7 @@ onMounted(()=>{
     width: 120px;
     height: 30px;
     transition:all .3s;
+    cursor: pointer;
+    border-radius: 5px;
 }
 </style>

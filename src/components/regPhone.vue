@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
 
 const phone1 = '15666666666';
 const phone2 = '11111111111';
@@ -14,9 +12,8 @@ for(let i = 0; i < arr.length; i++){
 <template>
 <textarea class="w-full h-50" name="" id="">
 <script lang="ts" setup>
-  import { inject } from 'vue';
-  import ZZTOOL from '@zzcpt/zztool';
-  const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+  -- 验证手机号,仅支持中国大陆手机号
+  import * as zztool from '@zzcpt/zztool';
   
   const phone1 = '15666666666';
   const phone2 = '11111111111';

@@ -1,16 +1,14 @@
 <script lang="ts" setup>
 import * as zztool from '@zzcpt/zztool';
-
-const random = zztool.getRandom(0,100);
-console.log(random)
+const number = zztool.getPercentage(10, 100,2);
+console.log(number)
 </script>
 <template>
 <textarea class="w-full h-50" name="" id="">
 <script lang="ts" setup>
- import * as zztool from '@zzcpt/zztool';
-  
-  const random = zztool.getRandom(0,100);
-  console.log(random)
+import * as zztool from '@zzcpt/zztool';
+const number = zztool.getPercentage(10, 100,2);
+console.log(number)
 </script>
 </textarea>
 </template>

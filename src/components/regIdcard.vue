@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
 
 const idcard1 = '111111111111111111';
 const idcard2 = '46516546549874654x';
@@ -17,9 +15,7 @@ for(let i = 0; i < arr.length; i++){
 --- 本方法验证的是真实有效的身份证号码 ---
 ------------------------------------------
 <script lang="ts" setup>
-  import { inject } from 'vue';
-  import ZZTOOL from '@zzcpt/zztool';
-  const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+  import * as zztool from '@zzcpt/zztool';
   
   const idcard1 = '111111111111111111';
   const idcard2 = '46516546549874654x';

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@zzcpt/zztool": "^1.1.4",
+    "@zzcpt/zztool": "^1.2.2",
     "vue": "^3.4.37"
   },
   "devDependencies": {

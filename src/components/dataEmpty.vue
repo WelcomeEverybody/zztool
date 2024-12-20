@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
 
 const obj1 = {a:2,b:1,c:{d:1}};
 const obj2 = {a:2,b:1,c:{d:1,e:[]}};
@@ -12,9 +10,7 @@ console.log(data1,data2)
 <template>
 <textarea class="w-full h-full" name="" id="">
 <script lang="ts" setup>
-  import { inject } from 'vue';
-  import ZZTOOL from '@zzcpt/zztool';
-  const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+  import * as zztool from '@zzcpt/zztool';
   
   const obj1 = {a:2,b:1,c:{d:1}};
   const obj2 = {a:2,b:1,c:{d:1,e:[]}};

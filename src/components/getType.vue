@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
 const number = 10;
 const type = zztool.getType(number);
 console.log(type)
@@ -9,12 +7,10 @@ console.log(type)
 <template>
 <textarea class="w-full h-50" name="" id="">
 <script lang="ts" setup>
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
 const number = 10;
 const type = zztool.getType(number);
-console.log(type) // number
+console.log(type)
 </script>
 </textarea>
 </template>

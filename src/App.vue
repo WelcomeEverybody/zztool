@@ -29,7 +29,6 @@ import {
   dataMerge,
   dataUnique,
   dataUnEmpty,
-  dataFindValues,
   getDateInfo,
   getDateType,
   getDate,
@@ -37,6 +36,7 @@ import {
   getBetwenDate,
   getDateList,
   getTimeStep,
+  getPercentage
 } from "./components/index"
 const current = shallowRef(getVersion);
 const map: any = {
@@ -65,7 +65,6 @@ const map: any = {
   "dataMerge": dataMerge,
   "dataUnique": dataUnique,
   "dataUnEmpty": dataUnEmpty,
-  "dataFindValues": dataFindValues,
   "getDateInfo": getDateInfo,
   "getDateType": getDateType,
   "getDate": getDate,
@@ -73,7 +72,8 @@ const map: any = {
   "getBetwenDate": getBetwenDate,
   "getDateList": getDateList,
   "getTimeStep": getTimeStep,
-  "shuffleArray": shuffleArray
+  "shuffleArray": shuffleArray,
+  "getPercentage":getPercentage
 }
 const menuChangeFn = (item: any) => {
   console.log(`%c${item.title}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px")
@@ -107,24 +107,12 @@ onMounted(() => {
           <h4>安装/使用</h4>
           <code>
             <pre>
-===== Vue
 --- install
 npm install @zzcpt/zztool@latest
---- main.ts
-import ZZTOOL from '@zzcpt/zztool';
-createApp(App).provide("$ZZTOOL",new ZZTOOL()).mount('#app')
 ---xxx.vue
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
+import { xxx } from '@zzcpt/zztool';
 
-===== Nuxt
-npm install @zzcpt/zztool@latest
---- composables/zztool.ts
-import ZZTOOL from "@zzcpt/zztool";
-export const tool:ZZTOOL = (() => {
-    return new ZZTOOL();
-})()
             </pre>
           </code>
           <h4>说明</h4>

@@ -38,7 +38,7 @@ export default [
         {name:"数组去重",title:"dataUnique",com:"dataUnique"},
         {name:"数组去空",title:"dataUnEmpty",com:"dataUnEmpty"},
         {name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
-        {name:"dataFindValues",title:"dataFindValues",com:"dataFindValues"},
+        // {name:"dataFindValues",title:"dataFindValues",com:"dataFindValues"},
     ]},
     {name:'日期',list:[
         {name:"日期信息",title:"getDateInfo",com:"getDateInfo"},
@@ -48,5 +48,8 @@ export default [
         {name:"两个日期之间的日期",title:"getBetwenDate",com:"getBetwenDate"},
         {name:"某日期的近期天数",title:"getDateList",com:"getDateList"},
         {name:"获取时间段",title:"getTimeStep",com:"getTimeStep"},
+    ]},
+    {name:'计算',list:[
+        {name:'百分比',title:'getPercentage',com:"getPercentage"}
     ]}
 ]

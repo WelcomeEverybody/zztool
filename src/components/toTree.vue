@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
-import ZZTOOL from '@zzcpt/zztool';
-const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+import * as zztool from '@zzcpt/zztool';
 
 
 var data = [
@@ -17,9 +15,7 @@ console.log(tree)
 <template>
 <textarea class="w-full h-full" name="" id="">
 <script lang="ts" setup>
-  import { inject } from 'vue';
-  import ZZTOOL from '@zzcpt/zztool';
-  const zztool:ZZTOOL = inject('$ZZTOOL') as ZZTOOL;
+ import * as zztool from '@zzcpt/zztool';
   
   var data = [
     { id: 1, parentId: null, name: "Item 1" },

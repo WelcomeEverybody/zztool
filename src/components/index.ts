@@ -23,7 +23,6 @@ import {default as groupBy} from "./groupBy.vue";
 import {default as dataMerge} from "./dataMerge.vue";
 import {default as dataUnique} from "./dataUnique.vue";
 import {default as dataUnEmpty} from "./dataUnEmpty.vue";
-import {default as dataFindValues} from "./dataFindValues.vue";
 import {default as getDateInfo} from "./getDateInfo.vue";
 import {default as getDateType} from "./getDateType.vue";
 import {default as getDate} from "./getDate.vue";
@@ -32,8 +31,10 @@ import {default as getBetwenDate} from "./getBetwenDate.vue";
 import {default as getDateList} from "./getDateList.vue";
 import {default as getTimeStep} from "./getTimeStep.vue";
 import {default as shuffleArray} from "./shuffleArray.vue"
+import {default as getPercentage} from "./getPercentage.vue"
 
 export {
+    getPercentage,
     shuffleArray,
     getVersion,
     error,
@@ -60,7 +61,6 @@ export {
     dataMerge,
     dataUnique,
     dataUnEmpty,
-    dataFindValues,
     getDateInfo,
     getDateType,
     getDate,
