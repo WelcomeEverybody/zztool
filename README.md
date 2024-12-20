@@ -1,8 +1,6 @@
 # @zzcpt/zztool js 工具库
 
-## 简介
-
-`@zzcpt/zztool` 是一个轻量级、高性能的前端工具库，旨在简化日常开发中的常见操作，提高开发效率。它提供了多种实用的工具函数，包括数据处理、数据校验、格式转换等。
+`@zzcpt/zztool` 是一个轻量级，使用ECMAScript 2015，高性能的前端工具库，旨在简化日常开发中的常见操作，提高开发效率。它提供了多种实用的工具函数，包括数据处理、数据校验、格式转换等。
 
 ## 安装
 
@@ -56,15 +54,17 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 
 ## 1.2.1
 
-| 删除           | 增加 |
-| -------------- | -------------- |
+
+| 删除           | 增加         |
+| -------------- | ------------ |
 | dataFindValues | getTimeStamp |
-|                |
+|                |              |
 
 1. 调整导出规则可以按需导入
 2. 删除isNumber,isNaN等方法
 
 ## 1.1.5
+
 
 | 增加            | 优化        |
 | --------------- | ----------- |
@@ -84,6 +84,7 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 
 ## 1.1.4
 
+
 | 增加                | 优化           |
 | ------------------- | -------------- |
 | calculatePercentage | getUrlParam    |
@@ -91,6 +92,7 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 |                     | getBetweenDate |
 
 ## 1.1.3
+
 
 | 优化      |
 | --------- |
@@ -101,11 +103,13 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 
 增加[文档](https://czhangzihao.github.io/zztool/)
 
+
 | 修复        |
 | ----------- |
 | getDateList |
 
 ## 1.1.1
+
 
 | 增加           |
 | -------------- |
@@ -115,11 +119,13 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 
 ## 1.1.0
 
+
 | 修复      |
 | --------- |
 | regIdcard |
 
 ## 1.0.8
+
 
 | 优化        | 增加             |
 | ----------- | ---------------- |
@@ -130,9 +136,9 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 
 ## 1.0.7
 
+
 | 优化        | 增加        |
 | ----------- | ----------- |
 | toBoolean   | getUrlParam |
 | toArray     | paramFormat |
 | getDateType | getWeekTime |
-
