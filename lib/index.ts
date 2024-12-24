@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.2.3";
+const version = "1.2.4";
 console.log("%czztool%c" + `V${version}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px", "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px");
 /**
  * 插件公共方法
@@ -603,7 +603,6 @@ export function getDateInfo(str: any): {
   let strs = str;
   // 兼容ios
   if (typeof str === "string" && regIsHas(str, "-")) {
-    replaceAll;
     strs = replaceAll(str, "-", "/");
   }
   const date = strs ? new Date(strs) : new Date();
@@ -879,3 +878,8 @@ export function getTimeStamp(date: any = new Date(), mill = true) {
 export function getPercentage(part: number, total: number, decimalPlaces = 2) {
   return ((part / total) * 100).toFixed(decimalPlaces);
 }
+
+
+/**
+ * 事件订阅发布器
+ */
