@@ -14,8 +14,10 @@ const emnu:any = {
     'zh-CN':'zh',
 }
 
-var systemLanguage = navigator.language; 
-console.log(systemLanguage);
+var systemLanguage = navigator.language;
+if(!emnu[systemLanguage]){
+    systemLanguage = 'zh';
+}
 
 if(localStorage.getItem('locale') === null){
     localStorage.setItem('locale',emnu[systemLanguage]);
