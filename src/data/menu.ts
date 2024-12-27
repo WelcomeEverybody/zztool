@@ -1,55 +1,54 @@
 export default [
-    {name:'公共方法',list:[
-        {name:"获取版本号",title:"getVersion",com:"getVersion"},
-        {name:"抛错",title:"error",com:"error"},
-        {name:"防抖",title:"debounce",com:"debounce"},
-        {name:"节流",title:"throttle",com:"throttle"},
+    {name:'publicmethods.title',list:[
+        {name:"publicmethods.list.li1.name",title:"getVersion",com:"getVersion"},
+        {name:"publicmethods.list.li2.name",title:"error",com:"error"},
+        {name:"publicmethods.list.li3.name",title:"debounce",com:"debounce"},
+        {name:"publicmethods.list.li4.name",title:"throttle",com:"throttle"},
     ]},
-    {name:'类型检测',list:[
-        {name:"获取类型",title:"getType",com:"getType"},
+    {name:'typedetection.title',list:[
+        {name:"typedetection.list.li1.name",title:"getType",com:"getType"},
     ]},
-    {name:'正则操作',list:[
-        {name:"是否包含xx",title:"regIsHas",com:"regIsHas"},
-        {name:"是否为邮箱",title:"regEmail",com:"regEmail"},
-        {name:"是否为手机号",title:"regPhone",com:"regPhone"},
-        {name:"是否为身份证号",title:"regIdcard",com:"regIdcard"},
+    {name:'regexp.title',list:[
+        {name:"regexp.list.li1.name",title:"regIsHas",com:"regIsHas"},
+        {name:"regexp.list.li2.name",title:"regEmail",com:"regEmail"},
+        {name:"regexp.list.li3.name",title:"regPhone",com:"regPhone"},
+        {name:"regexp.list.li4.name",title:"regIdcard",com:"regIdcard"},
     ]},
-    {name:'参数获取',list:[
-        {name:"获取url参数",title:"getUrlParam",com:"getUrlParam"},
-        {name:"参数格式化",title:"paramformat",com:"paramformat"},
+    {name:'getparam.get',list:[
+        {name:"getparam.list.li1.name",title:"getUrlParam",com:"getUrlParam"},
+        {name:"getparam.list.li2.name",title:"paramformat",com:"paramformat"},
     ]},
-    {name:'转类型',list:[
-        {name:"转字符串",title:"toString",com:"toString"},
-        {name:"转数组",title:"toArray",com:"toArray"},
+    {name:'transfertype.title',list:[
+        {name:"transfertype.list.li1.name",title:"toString",com:"toString"},
+        {name:"transfertype.list.li2.name",title:"toArray",com:"toArray"},
     ]},
-    {name:'工具函数',list:[
-        {name:"获取随机数",title:"getRandom",com:"getRandom"},
-        {name:"获取随机数组",title:"getRandomArray",com:"getRandomArray"},
-        {name:"获取随机颜色",title:"getRandomColor",com:"getRandomColor"},
-        {name:"金额千分位",title:"moneyFormat",com:"moneyFormat"},
+    {name:'utilfn.title',list:[
+        {name:"utilfn.list.li1.name",title:"getRandom",com:"getRandom"},
+        {name:"utilfn.list.li2.name",title:"getRandomArray",com:"getRandomArray"},
+        {name:"utilfn.list.li3.name",title:"getRandomColor",com:"getRandomColor"},
+        {name:"utilfn.list.li4.name",title:"moneyFormat",com:"moneyFormat"},
     ]},
-    {name:'数据处理',list:[
-        {name:"数据对比",title:"dataEqual",com:"dataEqual"},
-        {name:"对象中是否有空值",title:"dataEmpty",com:"dataEmpty"},
-        {name:"深克隆",title:"deepClone",com:"deepClone"},
-        {name:"转树形结构",title:"toTree",com:"toTree"},
-        {name:"数据分组",title:"groupBy",com:"groupBy"},
-        {name:"取交/并/差/补",title:"dataMerge",com:"dataMerge"},
-        {name:"数组去重",title:"dataUnique",com:"dataUnique"},
-        {name:"数组去空",title:"dataUnEmpty",com:"dataUnEmpty"},
-        {name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
-        // {name:"dataFindValues",title:"dataFindValues",com:"dataFindValues"},
+    {name:'data.title',list:[
+        {name:"data.list.li1.name",title:"dataEqual",com:"dataEqual"},
+        {name:"data.list.li2.name",title:"dataEmpty",com:"dataEmpty"},
+        {name:"data.list.li3.name",title:"deepClone",com:"deepClone"},
+        {name:"data.list.li4.name",title:"toTree",com:"toTree"},
+        {name:"data.list.li5.name",title:"groupBy",com:"groupBy"},
+        {name:"data.list.li6.name",title:"dataMerge",com:"dataMerge"},
+        {name:"data.list.li7.name",title:"dataUnique",com:"dataUnique"},
+        {name:"data.list.li8.name",title:"dataUnEmpty",com:"dataUnEmpty"},
+        {name:"data.list.li9.name",title:"shuffleArray",com:"shuffleArray"},
     ]},
-    {name:'日期',list:[
-        {name:"日期信息",title:"getDateInfo",com:"getDateInfo"},
-        {name:"日期类型",title:"getDateType",com:"getDateType"},
-        {name:"获取日期",title:"getDate",com:"getDate"},
-        {name:"月份天数",title:"getMonthDays",com:"getMonthDays"},
-        {name:"两个日期之间的日期",title:"getBetwenDate",com:"getBetwenDate"},
-        {name:"某日期的近期天数",title:"getDateList",com:"getDateList"},
-        {name:"获取时间段",title:"getTimeStep",com:"getTimeStep"},
+    {name:'date.title',list:[
+        {name:"date.list.li1.name",title:"getDateInfo",com:"getDateInfo"},
+        {name:"date.list.li2.name",title:"getDateType",com:"getDateType"},
+        {name:"date.list.li3.name",title:"getDate",com:"getDate"},
+        {name:"date.list.li4.name",title:"getMonthDays",com:"getMonthDays"},
+        {name:"date.list.li5.name",title:"getBetwenDate",com:"getBetwenDate"},
+        {name:"date.list.li6.name",title:"getDateList",com:"getDateList"},
+        {name:"date.list.li7.name",title:"getTimeStep",com:"getTimeStep"},
     ]},
-    {name:'计算',list:[
-        {name:'百分比',title:'getPercentage',com:"getPercentage"}
+    {name:'calc.title',list:[
+        {name:'calc.list.li1.name',title:'getPercentage',com:"getPercentage"}
     ]}
 ]

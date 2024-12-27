@@ -1,0 +1,102 @@
+export default {
+    zh:'zh',
+    en:'en',
+    install:'Install',
+    use:'Use',
+    close:'Close',
+    illustrate:"Illustrate",
+    current:'Current ',
+    language:"Language",
+    space:"Space",
+    stop:'Stop',
+    click:'Click',
+    alertTitle:'We are travelers in a hurry, and blessings are like spring rain, nourishing our hearts. May you always smile, live a happy and sweet life, and have a prosperous career and a bright future. May health and happiness always be with you.',
+    dialog:{
+        illustrate1:"Document example output is in the console",
+        illustrate2:"You can use commands such as zz.getVersion() in the console to use this tool library.",
+    },
+    illustrateComponent:{
+        li1:"Installation (see console)",
+        li2:"Can be used anywhere",
+        li3:"Please see the console for the output results",
+    },
+    publicmethods:{
+        title:"PublicMethods",
+        list:{
+            li1:{name:"GetVersion",title:"getVersion",com:"getVersion"},
+            li2:{name:"ThrowError",title:"error",com:"error"},
+            li3:{name:"Debounce",title:"debounce",com:"debounce"},
+            li4:{name:"Throttle",title:"throttle",com:"throttle"},
+        }
+    },
+    typedetection:{
+        title:"TypeDetection",
+        list:{
+            li1:{name:"GetType",title:"getType",com:"getType"},
+        }
+    },
+    regexp:{
+        title:"RegExp",
+        list:{
+            li1:{name:"IsContains",title:"regIsHas",com:"regIsHas"},
+            li2:{name:"IsEmail",title:"regEmail",com:"regEmail"},
+            li3:{name:"IsPhone",title:"regPhone",com:"regPhone"},
+            li4:{name:"IsIdcard",title:"regIdcard",com:"regIdcard"},
+        }
+    },
+    getparam:{
+        title:"GetParam",
+        list:{
+            li1:{name:"GetUrlParam",title:"getUrlParam",com:"getUrlParam"},
+            li2:{name:"ParamFormat",title:"paramformat",com:"paramformat"},
+        }
+    },
+    transfertype:{
+        title:"TransferType",
+        list:{
+            li1:{name:"ToString",title:"toString",com:"toString"},
+            li2:{name:"ToArray",title:"toArray",com:"toArray"},
+        }
+    },
+    utilfn:{
+        title:"UtilFn",
+        list:{
+            li1:{name:"GetRandomNum",title:"getRandom",com:"getRandom"},
+            li2:{name:"GetRandomArr",title:"getRandomArray",com:"getRandomArray"},
+            li3:{name:"GetRandomColor",title:"getRandomColor",com:"getRandomColor"},
+            li4:{name:"Thousandths",title:"moneyFormat",com:"moneyFormat"},
+        }
+    },
+    data:{
+        title:"Data",
+        list:{
+            li1:{name:"DataEqual",title:"dataEqual",com:"dataEqual"},
+            li2:{name:"DataEmpty",title:"dataEmpty",com:"dataEmpty"},
+            li3:{name:"DeepClone",title:"deepClone",com:"deepClone"},
+            li4:{name:"ToTree",title:"toTree",com:"toTree"},
+            li5:{name:"GroupBy",title:"groupBy",com:"groupBy"},
+            li6:{name:"DataMerge",title:"dataMerge",com:"dataMerge"},
+            li7:{name:"DataUnique",title:"dataUnique",com:"dataUnique"},
+            li8:{name:"DataUnEmpty",title:"dataUnEmpty",com:"dataUnEmpty"},
+            li9:{name:"ShuffleArray",title:"shuffleArray",com:"shuffleArray"},
+        }
+    },
+    date:{
+        title:"Date",
+        list:{
+            li1:{name:"GetDateInfo",title:"getDateInfo",com:"getDateInfo"},
+            li2:{name:"GetDateType",title:"getDateType",com:"getDateType"},
+            li3:{name:"GetDate",title:"getDate",com:"getDate"},
+            li4:{name:"GetMonthDays",title:"getMonthDays",com:"getMonthDays"},
+            li5:{name:"GetBetwenDate",title:"getBetwenDate",com:"getBetwenDate"},
+            li6:{name:"GetDateList",title:"getDateList",com:"getDateList"},
+            li7:{name:"GetTimeStep",title:"getTimeStep",com:"getTimeStep"},
+        }
+    },
+    calc:{
+        title:"Calc",
+        list:{
+            li1:{name:"Percentage",title:"getPercentage",com:"getPercentage"},
+        }
+    }
+}

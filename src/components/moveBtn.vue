@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import {ref,onMounted} from "vue";
 import * as zztool from '@zzcpt/zztool';
+import { useI18n } from "vue-i18n";
 
+const { t:$t } = useI18n();
 const btn = ref();
 const width = 120;
 const height = 30;
@@ -24,7 +26,7 @@ const setXY = () => {
 onMounted(()=>{
     btn.value.addEventListener("mouseenter",setXY);
     btn.value.addEventListener("click",() => {
-        alert('我们是匆匆的行者，祝福如春雨，滋润心田间。愿你笑容常开，生活美满甜；事业步步高，前程似锦绣。健康快乐伴你左右，幸福永远与你相伴。')
+        alert($t('alertTitle'))
     })
     window.onresize = setXY;
     window.addEventListener("keydown",(e)=>{  
@@ -37,7 +39,7 @@ onMounted(()=>{
 </script>
 
 <template>
-    <button ref="btn" id="btn">空格定身(点击)</button>
+    <button ref="btn" id="btn">{{$t('space')}}{{$t('stop')}}({{ $t('click') }})</button>
 </template>
 
 <style scoped>

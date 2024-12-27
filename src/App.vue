@@ -2,6 +2,7 @@
 import { shallowRef, onMounted, ref } from "vue";
 import MoveBtn from "./components/moveBtn.vue";
 import Menu from "./components/menu.vue";
+import { useI18n } from "vue-i18n";
 import {
   shuffleArray,
   getVersion,
@@ -80,6 +81,7 @@ const menuChangeFn = (item: any) => {
   current.value = map[item.com];
 }
 
+const { t:$t } = useI18n();
 const dialog = ref();
 const closeBtn = ref();
 onMounted(() => {
@@ -90,6 +92,7 @@ onMounted(() => {
     dialog.value.close()
   })
 })
+
 </script>
 
 <template>
@@ -104,24 +107,25 @@ onMounted(() => {
       <div class="win">
         <div class="container">
 
-          <h4>安装/使用</h4>
+          <h4>{{$t('install')}}/{{$t('use')}}</h4>
           <code>
             <pre>
 --- install
 npm install @zzcpt/zztool@latest
----xxx.vue
+--- file
 import * as zztool from '@zzcpt/zztool';
 import { xxx } from '@zzcpt/zztool';
 
             </pre>
           </code>
-          <h4>说明</h4>
+          <h4>{{$t('illustrate')}}</h4>
           <ul style="list-style: inside;">
-            <li>文档示例输出均在控制台</li>
-            <li>可在控制台中使用 zz.getVersion() 等命令使用该工具库</li>
+            <li>{{$t('dialog.illustrate1')}}</li>
+            <li>{{$t('dialog.illustrate2')}}</li>
           </ul>
+
         </div>
-        <button class="closeBtn">关 闭</button>
+        <button class="closeBtn">{{ $t('close') }}</button>
       </div>
     </dialog>
   </div>
