@@ -11,3 +11,7 @@
 .h-50{
   height: 50%;
 }
+textarea{
+  padding: 10px;
+  box-sizing: border-box;
+}

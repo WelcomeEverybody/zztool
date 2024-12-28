@@ -87,7 +87,7 @@ const closeBtn = ref();
 onMounted(() => {
   dialog.value = document.getElementById('dialog') as any
   closeBtn.value = document.querySelector('.closeBtn') as any
-  dialog.value.showModal();
+  // dialog.value.showModal();
   closeBtn.value.addEventListener('click', function () {
     dialog.value.close()
   })

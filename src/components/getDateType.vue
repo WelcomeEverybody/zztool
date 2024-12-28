@@ -1,14 +1,9 @@
 <script lang="ts" setup>
-import * as zztool from '@zzcpt/zztool';
-
-console.log(zztool.getDateType('2023-6-15',"Y/M/D"))
+const strCode = `
+const date = zztool.getDateType('2023-6-15',"Y/M/D")
+console.log(date)
+`
 </script>
 <template>
-<textarea class="w-full h-full" name="" id="">
-<script lang="ts" setup>
-  import * as zztool from '@zzcpt/zztool';
-  
-  console.log(zztool.getDateType('2023-6-15',"Y/M/D"))
-</script>
-</textarea>
+  <InputText :contents="strCode"></InputText>
 </template>

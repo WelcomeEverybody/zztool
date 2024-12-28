@@ -10,6 +10,8 @@ export default {
     space:"空格",
     stop:'停止',
     click:"点击",
+    run:"运行",
+    output:"输出",
     alertTitle:"我们是匆匆的行者，祝福如春雨，滋润心田间。愿你笑容常开，生活美满甜；事业步步高，前程似锦绣。健康快乐伴你左右，幸福永远与你相伴。",
     dialog:{
         illustrate1:"文档示例输出均在控制台",
@@ -71,13 +73,14 @@ export default {
         title:"数据处理",
         list:{
             li1:{name:"数据对比",title:"dataEqual",com:"dataEqual"},
-            li2:{name:"深克隆",title:"deepClone",com:"deepClone"},
-            li3:{name:"转树形结构",title:"toTree",com:"toTree"},
-            li4:{name:"数据分组",title:"groupBy",com:"groupBy"},
-            li5:{name:"取交/并/差/补",title:"dataMerge",com:"dataMerge"},
-            li6:{name:"数组去重",title:"dataUnique",com:"dataUnique"},
-            li7:{name:"数组去空",title:"dataUnEmpty",com:"dataUnEmpty"},
-            li8:{name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
+            li2:{name:"数据是否有空值",title:"dataEmpty",com:"dataEmpty"},
+            li3:{name:"深克隆",title:"deepClone",com:"deepClone"},
+            li4:{name:"转树形结构",title:"toTree",com:"toTree"},
+            li5:{name:"数据分组",title:"groupBy",com:"groupBy"},
+            li6:{name:"取交/并/差/补",title:"dataMerge",com:"dataMerge"},
+            li7:{name:"数组去重",title:"dataUnique",com:"dataUnique"},
+            li8:{name:"数组去空",title:"dataUnEmpty",com:"dataUnEmpty"},
+            li9:{name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
         }
     },
     date:{

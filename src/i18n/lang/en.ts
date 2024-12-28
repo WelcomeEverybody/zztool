@@ -10,6 +10,8 @@ export default {
     space:"Space",
     stop:'Stop',
     click:'Click',
+    run:'Run',
+    output:'Output',
     alertTitle:'We are travelers in a hurry, and blessings are like spring rain, nourishing our hearts. May you always smile, live a happy and sweet life, and have a prosperous career and a bright future. May health and happiness always be with you.',
     dialog:{
         illustrate1:"Document example output is in the console",

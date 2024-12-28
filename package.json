@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@zzcpt/zztool": "^1.2.2",
+    "@zzcpt/zztool": "^1.2.5",
     "vue": "^3.4.37",
     "vue-i18n": "^11.0.1"
   },

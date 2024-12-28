@@ -14,7 +14,7 @@ export default [
         {name:"regexp.list.li3.name",title:"regPhone",com:"regPhone"},
         {name:"regexp.list.li4.name",title:"regIdcard",com:"regIdcard"},
     ]},
-    {name:'getparam.get',list:[
+    {name:'getparam.title',list:[
         {name:"getparam.list.li1.name",title:"getUrlParam",com:"getUrlParam"},
         {name:"getparam.list.li2.name",title:"paramformat",com:"paramformat"},
     ]},

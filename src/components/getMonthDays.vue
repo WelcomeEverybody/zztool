@@ -1,14 +1,9 @@
 <script lang="ts" setup>
-import * as zztool from '@zzcpt/zztool';
-
-console.log(zztool.getMonthDays(2024,6))
+const strCode = `
+const days = zztool.getMonthDays(2024,6);
+console.log(days);
+`
 </script>
 <template>
-<textarea class="w-full h-full" name="" id="">
-<script lang="ts" setup>
-  import * as zztool from '@zzcpt/zztool';
-  
-  console.log(zztool.getMonthDays(2024,6))
-</script>
-</textarea>
+  <InputText :contents="strCode"></InputText>
 </template>

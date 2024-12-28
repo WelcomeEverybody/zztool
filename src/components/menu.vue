@@ -1,11 +1,14 @@
 <script lang="ts" setup>
+import {ref} from "vue"
 import {useI18n} from "vue-i18n";
 import MenuData from "../data/menu";
 const emit = defineEmits(["change"])
 
 const { t:$t,locale } = useI18n();
+const current = ref('getVersion')
 const changeFn = (item:any) => {
     emit("change",item)
+    current.value = item.title
 }
 const localeLange = localStorage.getItem('locale') || 'zh'
 const localeChange = (e: any) => {
@@ -31,7 +34,7 @@ const localeChange = (e: any) => {
         </div>
         <div class="menu-item" v-for="(item,index) in MenuData" :key="index">
             <div class="title">{{ $t(item.name) }}</div>
-            <div class="item" v-for="(items,indexs) in item.list" :key="indexs" @click="changeFn(items)">{{ $t(items.name) }}</div>
+            <div class="item" v-for="(items,indexs) in item.list" :key="indexs" @click="changeFn(items)" :class="[current === items.title?'active':'']">{{ $t(items.name) }}</div>
         </div>
     </div>
 </template>
@@ -58,5 +61,12 @@ const localeChange = (e: any) => {
 .menu-item .item{
     font-size: 14px;
     padding-left: 20px;
+}
+.active{
+    background-color: #000;
+    transition: all 0.3s;
+    transform: scale(1.1);
+    transform-origin: center;
+    color: rgb(255, 255, 255);
 }
 </style>

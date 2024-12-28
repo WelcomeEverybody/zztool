@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import * as zztool from '@zzcpt/zztool';
-
+const strCode = `
 var data = [
     { id: 1, parentId: 2, name: "Item 1" },
     { id: 2, parentId: 1, name: "Item 1.1" },
@@ -9,20 +8,8 @@ var data = [
 ]
 const datas = zztool.groupBy(data, 'parentId');
 console.log(datas)
+`
 </script>
 <template>
-<textarea class="w-full h-full" name="" id="">
-<script lang="ts" setup>
-  import * as zztool from '@zzcpt/zztool';
-  
-  var data = [
-    { id: 1, parentId: 2, name: "Item 1" },
-    { id: 2, parentId: 1, name: "Item 1.1" },
-    { id: 3, parentId: 1, name: "Item 1.2" },
-    { id: 4, parentId: 2, name: "Item 1.1.1" },
-  ]
-  const datas = zztool.groupBy(data, 'parentId');
-  console.log(datas)
-</script>
-</textarea>
+  <InputText :contents="strCode" />
 </template>
