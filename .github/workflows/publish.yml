@@ -21,9 +21,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm
       - run: npm ci
-      - run: npm run build
       - run: |
-          VERSION=$(node -p "require('./package.json').version")
+          VERSION=$(node -p "require('../package.json').version")
           cd dist
           if [[ "$VERSION" == *"beta"* ]]; then
             npm publish --tag=beta-v2
