@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.2.4";
+const version = "1.2.6";
 console.log("%czztool%c" + `V${version}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px", "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px");
 /**
  * 插件公共方法
@@ -12,10 +12,13 @@ export function replaceAll(
   target: string,
   replacement: string
 ): string {
-  const regex = new RegExp(target, "g");
-  return str.replace(regex, replacement);
+  return str.replace(new RegExp(target, "g"), replacement);
 }
-
+function isString(str:string){
+  if (typeof str !== "string") {
+    error("参数类型错误，必须为字符串");
+  }
+}
 /**
  * 获取版本号
  * @returns 版本号
@@ -97,9 +100,8 @@ export function regPhone(str: string) {
  * @returns 是否为身份证
  */
 export function regIdcard(str: string) {
-  if (!/^\d{17}(\d|X)$/i.test(str)) {
-    return false;
-  }
+  if (!/^\d{17}(\d|X)$/i.test(str)) return false;
+  
   const provinceCodes: any = {
     11: "北京",
     12: "天津",
@@ -137,9 +139,7 @@ export function regIdcard(str: string) {
     82: "澳门",
     91: "国外",
   };
-  if (!provinceCodes[str.substring(0, 2)]) {
-    return false;
-  }
+  if (!provinceCodes[str.substring(0, 2)]) return false;
   const birthday = str.substring(6, 14);
   const year = birthday.substring(0, 4);
   const month = birthday.substring(4, 6);
@@ -171,9 +171,7 @@ export function regIdcard(str: string) {
  * @returns 第一个字符
  */
 export function getFirstChar(str: string) {
-  if (typeof str !== "string") {
-    error("参数类型错误，必须为字符串");
-  }
+  isString(str)
   return str.charAt(0);
 }
 /**
@@ -182,9 +180,7 @@ export function getFirstChar(str: string) {
  * @returns 最后一个字符
  */
 export function getLastChar(str: string) {
-  if (typeof str !== "string") {
-    error("参数类型错误，必须为字符串");
-  }
+  isString(str)
   return str.substring(str.length - 1, str.length);
 }
 /**
@@ -195,14 +191,9 @@ export function getLastChar(str: string) {
  * @returns 字符
  */
 export function getChar(str: string, start: number, end: number) {
-  if (typeof str !== "string") {
-    error("参数类型错误，必须为字符串");
-  }
+  isString(str);
   const char = str.substring(start, end);
-  if (!char) {
-    return "";
-  }
-  return char;
+  return char ? char : ""
 }
 /**
  * 获取url参数
@@ -249,7 +240,7 @@ export function paramformat(obj: any, type = "url") {
  * @returns 字符串
  */
 export function toString(obj: any) {
-  if (!obj) error;
+  if (!obj) error('该变量没有值');
   const chars = JSON.stringify(obj);
   if (getFirstChar(chars) === "\\") {
     return chars.replace(/\\/g, "");
@@ -488,24 +479,75 @@ export function deepClone(obj: any) {
   }
   error("Unsupported data type");
 }
+
+/**
+ * 修改对象中的下标
+ * index和newIndex必须是字符串，多个下标用逗号分隔
+ * @param {*} data
+ * @param {*} index
+ * @param {*} newIndex
+ * @returns {object}
+ */
+export function dataChangeIndex(
+  data: object,
+  index: string,
+  newIndex: string
+): object {
+  if (typeof data !== "object" || data === null) return data;
+  const indexArr = toArray(index,',');
+  const newIndexArr = toArray(newIndex,',');
+  if (indexArr.length !== newIndexArr.length) {
+    error("下表必须和新下标长度一致");
+  }
+  for(let i = 0; i < indexArr.length; i++) {
+    hfn(data, indexArr[i], newIndexArr[i]);
+  }
+  function hfn(data: any, index: string, newIndex: string){
+    if (typeof data !== 'object' || data === null) return;
+    Object.keys(data).forEach(key => {
+      if (key === index) {
+        data[newIndex] = data[key];
+      }
+      if (typeof data[key] === 'object') {
+        hfn(data[key], index, newIndex);
+      }
+    });
+    if(data.hasOwnProperty(index)){
+      delete data[index];
+    }
+  }
+  return data;
+}
+/**
+ * 获取对象所有相同下标的值
+ * 
+ */
+// export function getSameIndexValue(data: Object, index: string): Array<any> {
+//   const arr:any[] = [];
+
+//   function hfn(data: any, index: string){
+
+//   }
+//   return arr;
+// }
 /**
  * 转树形结构
  * @param {*} data
  * @param {*} pid   父级id
  */
 export function toTree(data: any[], pid: string) {
-  let tree: any[] = [];
-  let lookup: any = {};
-
+  let tree:any = [];
+  let lookup:any = {};
   data.forEach((item) => {
-    lookup[item.id] = { ...item, children: [] };
+      lookup[item.id] = Object.assign(Object.assign({}, item), { children: [] });
   });
   data.forEach((item) => {
-    if (item.pid === pid) {
-      tree.push(lookup[item.id]);
-    } else {
-      lookup[item.pid] && lookup[item.pid].children.push(lookup[item.id]);
-    }
+      if (item[pid] === null) {
+          tree.push(lookup[item.id]);
+      }
+      else {
+          lookup[item[pid]].children.push(lookup[item.id]);
+      }
   });
   return tree;
 }
@@ -554,6 +596,36 @@ export function dataMerge(data1: any[], data2: any[], type: number = 1) {
  */
 export function uniqueArray(data: any[]) {
   return [...new Set(data)];
+}
+/**
+ * 数组分块
+ * 将数组分成size块
+ * @param data 数组
+ * @param size 大小
+ */
+export function chunkArray(data:any[],size:number):any[]{
+  if(size <= 1){
+    return [data];
+  }
+  const result:any[] = [];
+  const lng = Math.ceil(data.length / size);
+  for(let i = 0; i < size; i++){
+    result.push(data.slice(i * lng, (i + 1) * lng))
+  }
+  return result;
+}
+/**
+ * 数组分块
+ * 将数组分成每块为size大小
+ * @param arr 数组
+ * @param size 大小
+ */
+export function chunkArrayItem(arr:any[], size:number):any[] {
+  const result:any[] = [];
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
+  }
+  return result;
 }
 /**
  * 根据某个字段找对应的数组或对象，如果有两个相同的数据会优先返回第一个
@@ -879,7 +951,9 @@ export function getPercentage(part: number, total: number, decimalPlaces = 2) {
   return ((part / total) * 100).toFixed(decimalPlaces);
 }
 
-
 /**
- * 事件订阅发布器
+ * 延迟函数
  */
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

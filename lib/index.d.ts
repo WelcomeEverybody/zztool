@@ -169,11 +169,24 @@ export declare function dataEmpty(obj: any, returnKeys?: boolean, parentKey?: st
  */
 export declare function deepClone(obj: any): any;
 /**
+ * 修改对象中的下标
+ * index和newIndex必须是字符串，多个下标用逗号分隔
+ * @param {*} data
+ * @param {*} index
+ * @param {*} newIndex
+ * @returns {object}
+ */
+export declare function dataChangeIndex(data: object, index: string, newIndex: string): object;
+/**
+ * 获取对象所有相同下标的值
+ *
+ */
+/**
  * 转树形结构
  * @param {*} data
  * @param {*} pid   父级id
  */
-export declare function toTree(data: any[], pid: string): any[];
+export declare function toTree(data: any[], pid: string): any;
 /**
  * 数据分组
  * @param {*} data
@@ -196,6 +209,20 @@ export declare function dataMerge(data1: any[], data2: any[], type?: number): an
  * @param data 数组
  */
 export declare function uniqueArray(data: any[]): any[];
+/**
+ * 数组分块
+ * 将数组分成size块
+ * @param data 数组
+ * @param size 大小
+ */
+export declare function chunkArray(data: any[], size: number): any[];
+/**
+ * 数组分块
+ * 将数组分成每块为size大小
+ * @param arr 数组
+ * @param size 大小
+ */
+export declare function chunkArrayItem(arr: any[], size: number): any[];
 /**
  * 根据某个字段找对应的数组或对象，如果有两个相同的数据会优先返回第一个
  * @param {*} data
@@ -307,3 +334,7 @@ export declare function getTimeStamp(date?: any, mill?: boolean): number;
  * @returns
  */
 export declare function getPercentage(part: number, total: number, decimalPlaces?: number): string;
+/**
+ * 延迟函数
+ */
+export declare function sleep(ms: number): Promise<unknown>;

@@ -34,7 +34,7 @@ import * as zztool from '@zzcpt/zztool';
 import { debounce, throttle } from '@zzcpt/zztool';
 
 // 使用示例
-const debouncedFn = debounce(() => console.log('Debounced!'), 300);
+const debouncedFn = () => { debounce(() => console.log('Debounced!'), 300); };
 debouncedFn();
 ```
 
@@ -44,7 +44,7 @@ debouncedFn();
 
 欢迎贡献代码或提交 Issue！
 
-GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
+GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
 
 ## 许可证
 
@@ -52,13 +52,26 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 
 # 更新日志
 
+## 1.2.4
+
+
+| 增加            | 优化   | col3 |
+| --------------- | ------ | ---- |
+| dataChangeIndex | toTree |      |
+| sleep           |        |      |
+| chunkArray      |        |      |
+| chunkArrayItem  |        |      |
+
+#### toTree
+
+一个判断出现了失误，更新1.2.1版本为了偷懒使用ai帮助减少体力劳动，更新时本人未检查到位。
+
 ## 1.2.1
 
 
 | 删除           | 增加         |
 | -------------- | ------------ |
 | dataFindValues | getTimeStamp |
-|                |              |
 
 1. 调整导出规则可以按需导入
 2. 删除isNumber,isNaN等方法
@@ -70,7 +83,6 @@ GitHub 仓库地址：[https://github.com/WelcomeEverybody/zztool
 | --------------- | ----------- |
 | getRandomString | getTimeStep |
 |                 | dataEqual   |
-|                 |             |
 
 #### getTimestep：
 
