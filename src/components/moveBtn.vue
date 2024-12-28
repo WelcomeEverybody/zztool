@@ -50,5 +50,6 @@ onMounted(()=>{
     transition:all .3s;
     cursor: pointer;
     border-radius: 5px;
+    z-index: 999;
 }
 </style>

@@ -37,7 +37,9 @@ import {
   getBetwenDate,
   getDateList,
   getTimeStep,
-  getPercentage
+  getPercentage,
+  dataChangeIndex,
+  chunkArray
 } from "./components/index"
 const current = shallowRef(getVersion);
 const map: any = {
@@ -74,7 +76,9 @@ const map: any = {
   "getDateList": getDateList,
   "getTimeStep": getTimeStep,
   "shuffleArray": shuffleArray,
-  "getPercentage":getPercentage
+  "getPercentage":getPercentage,
+  "dataChangeIndex":dataChangeIndex,
+  "chunkArray": chunkArray
 }
 const menuChangeFn = (item: any) => {
   console.log(`%c${item.title}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px")
@@ -87,20 +91,26 @@ const closeBtn = ref();
 onMounted(() => {
   dialog.value = document.getElementById('dialog') as any
   closeBtn.value = document.querySelector('.closeBtn') as any
-  // dialog.value.showModal();
+  dialog.value.showModal();
   closeBtn.value.addEventListener('click', function () {
     dialog.value.close()
   })
 })
 
+const switchs = ref(false)
+const bgcolor = ref()
+setInterval(() => {
+  if(!switchs.value) return
+    bgcolor.value = zztool.getRandomRGBA()
+}, 100)
 </script>
 
 <template>
   <MoveBtn />
   <div style="display: flex;">
 
-    <Menu @change="menuChangeFn" />
-    <div style="width: 100%;padding: 10px;">
+    <Menu :switchs="switchs" :bgColor="bgcolor" @change="menuChangeFn" />
+    <div style="width: 100%;padding: 10px;transition:all 0.2s;" :style="{backgroundColor: bgcolor}">
       <component :is="current" />
     </div>
     <dialog id="dialog">
@@ -115,7 +125,6 @@ npm install @zzcpt/zztool@latest
 --- file
 import * as zztool from '@zzcpt/zztool';
 import { xxx } from '@zzcpt/zztool';
-
             </pre>
           </code>
           <h4>{{$t('illustrate')}}</h4>
@@ -126,6 +135,7 @@ import { xxx } from '@zzcpt/zztool';
 
         </div>
         <button class="closeBtn">{{ $t('close') }}</button>
+        <button @click="switchs = !switchs">{{$t('mod')}}</button>
       </div>
     </dialog>
   </div>

@@ -8,8 +8,8 @@ const { t:$t } = useI18n();
 </script>
 
 <template>
-  <div>
+  <div class="w-50 h-full">
     <h1>{{ $t('output') }}</h1>
-    <textarea disabled id="output" class="w-full h-50" style="height: 200px;" name="">{{props.content}}</textarea>
+    <textarea style="height: calc(100% - 37px);" disabled id="output" class="w-full" name="">{{props.content}}</textarea>
   </div>
 </template>

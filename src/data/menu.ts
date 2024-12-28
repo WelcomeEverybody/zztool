@@ -38,6 +38,8 @@ export default [
         {name:"data.list.li7.name",title:"dataUnique",com:"dataUnique"},
         {name:"data.list.li8.name",title:"dataUnEmpty",com:"dataUnEmpty"},
         {name:"data.list.li9.name",title:"shuffleArray",com:"shuffleArray"},
+        {name:"data.list.li10.name",title:"dataChangeIndex",com:"dataChangeIndex"},
+        {name:"data.list.li11.name",title:'chunkArray',com:'chunkArray'},
     ]},
     {name:'date.title',list:[
         {name:"date.list.li1.name",title:"getDateInfo",com:"getDateInfo"},

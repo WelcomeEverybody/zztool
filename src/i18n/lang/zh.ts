@@ -12,6 +12,7 @@ export default {
     click:"点击",
     run:"运行",
     output:"输出",
+    mod:"炫彩模式",
     alertTitle:"我们是匆匆的行者，祝福如春雨，滋润心田间。愿你笑容常开，生活美满甜；事业步步高，前程似锦绣。健康快乐伴你左右，幸福永远与你相伴。",
     dialog:{
         illustrate1:"文档示例输出均在控制台",
@@ -81,6 +82,8 @@ export default {
             li7:{name:"数组去重",title:"dataUnique",com:"dataUnique"},
             li8:{name:"数组去空",title:"dataUnEmpty",com:"dataUnEmpty"},
             li9:{name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
+            li10:{name:"修改索引",title:"dataChangeIndex",com:"dataChangeIndex"},
+            li11:{name:"数组分块",title:'chunkArray',com:'chunkArray'},
         }
     },
     date:{

@@ -27,10 +27,12 @@ const start = () => {
 </script>
 
 <template>
-  <div>
-    <textarea class="w-full" style="height:300px" name="" id="textarea">
-        {{ props.contents }}
-    </textarea>
+  <div style="display: flex;" class="h-full">
+    <div class="h-full  w-50">
+      <textarea class="w-full h-full" name="" id="textarea">
+          {{ props.contents }}
+      </textarea>
+    </div>
     <template v-if="props.show">
       <button @click="start">{{$t('run')}}</button>
       <Output></Output>

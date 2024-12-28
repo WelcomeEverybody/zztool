@@ -8,10 +8,14 @@
 .h-full{
   height: 100%;
 }
+.w-50{
+  width: 50%;
+}
 .h-50{
   height: 50%;
 }
 textarea{
   padding: 10px;
   box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
 }
