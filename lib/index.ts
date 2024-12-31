@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.2.6";
+const version = "1.2.7";
 console.log("%czztool%c" + `V${version}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px", "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px");
 /**
  * 插件公共方法
@@ -453,6 +453,34 @@ export function dataEmpty(
   }
 
   return emptyKeys.length > 0;
+}
+/**
+ * 获取对应索引的value
+ * @param obj 
+ * @param index 
+ * @returns 
+ */
+export function getSameIndexValue(obj: any, index: string,parentKey: string = ""): Array<{ key: string, value: any }> {
+  const arr: { key: string, value: any }[] = [];
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const fullKey = parentKey ? `${parentKey}.${key}` : key;
+      const value = obj[key];
+      if(typeof value === 'object'){
+        const nestedResult = getSameIndexValue(value,index,fullKey);
+        if (Array.isArray(nestedResult)) {
+          arr.push(...nestedResult);
+        }
+      }else if(key == index){
+        arr.push({
+          key:fullKey,
+          value
+        });
+      }
+    }
+  }
+  return arr;
 }
 /**
  * 深克隆
@@ -957,3 +985,22 @@ export function getPercentage(part: number, total: number, decimalPlaces = 2) {
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+/**
+ * 获取索引值
+ * 仅适用于 对象嵌套 
+ * 'xxx.xxx.xxx' 形式
+ * [xxx,xxx,xxx] 形式
+ * @param obj 
+ * @param path 
+ * @returns 
+ */
+export function getValue(obj:any, path:any){
+  if(typeof path === 'string' && regIsHas(path, '.')){
+    path = path.split('.');
+  }
+  if(!Array.isArray(path) || !path){
+    return '';
+  }
+  return path.reduce((acc:any, key:any) => acc && acc[key], obj);
+};

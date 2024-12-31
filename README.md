@@ -52,15 +52,23 @@ GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
 
 # 更新日志
 
+## 1.2.7
+
+
+| 增加              | col2 | col3 |
+| ----------------- | ---- | ---- |
+| getSameIndexValue |      |      |
+| getValue          |      |      |
+
 ## 1.2.4
 
 
-| 增加            | 优化   | col3 |
-| --------------- | ------ | ---- |
-| dataChangeIndex | toTree |      |
-| sleep           |        |      |
-| chunkArray      |        |      |
-| chunkArrayItem  |        |      |
+| 增加            | 优化   |
+| --------------- | ------ |
+| dataChangeIndex | toTree |
+| sleep           |        |
+| chunkArray      |        |
+| chunkArrayItem  |        |
 
 #### toTree
 
