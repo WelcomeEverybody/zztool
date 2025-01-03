@@ -39,7 +39,8 @@ import {
   getTimeStep,
   getPercentage,
   dataChangeIndex,
-  chunkArray
+  chunkArray,
+  getSameIndexValue
 } from "./components/index"
 const current = shallowRef(getVersion);
 const map: any = {
@@ -78,7 +79,8 @@ const map: any = {
   "shuffleArray": shuffleArray,
   "getPercentage":getPercentage,
   "dataChangeIndex":dataChangeIndex,
-  "chunkArray": chunkArray
+  "chunkArray": chunkArray,
+  "getSameIndexValue": getSameIndexValue
 }
 const menuChangeFn = (item: any) => {
   console.log(`%c${item.title}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px")

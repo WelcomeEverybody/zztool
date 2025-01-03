@@ -34,6 +34,7 @@ import {default as shuffleArray} from "./shuffleArray.vue"
 import {default as getPercentage} from "./getPercentage.vue"
 import {default as dataChangeIndex} from "./dataChangeIndex.vue"
 import {default as chunkArray} from "./chunkArray.vue"
+import {default as getSameIndexValue} from "./getSameIndexValue.vue"
 
 export {
     getPercentage,
@@ -71,5 +72,6 @@ export {
     getDateList,
     getTimeStep,
     dataChangeIndex,
-    chunkArray
+    chunkArray,
+    getSameIndexValue
 }

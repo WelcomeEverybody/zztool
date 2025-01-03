@@ -84,6 +84,7 @@ export default {
             li9:{name:"打乱数组",title:"shuffleArray",com:"shuffleArray"},
             li10:{name:"修改索引",title:"dataChangeIndex",com:"dataChangeIndex"},
             li11:{name:"数组分块",title:'chunkArray',com:'chunkArray'},
+            li12:{name:"获取索引值",title:'getSameIndexValue',com:'getSameIndexValue'},
         }
     },
     date:{

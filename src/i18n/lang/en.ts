@@ -84,6 +84,7 @@ export default {
             li9:{name:"ShuffleArray",title:"shuffleArray",com:"shuffleArray"},
             li10:{name:"DataChangeIndex",title:"dataChangeIndex",com:"dataChangeIndex"},
             li11:{name:"ChunkArray",title:'chunkArray',com:'chunkArray'},
+            li12:{name:"GetSameIndexValue",title:'getSameIndexValue',com:'getSameIndexValue'},
         }
     },
     date:{

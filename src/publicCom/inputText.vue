@@ -20,8 +20,8 @@ const start = () => {
   outputDom.value = '';
   const dom = document.getElementById('textarea') as HTMLTextAreaElement;
   const value = dom.value;
-
-  const str = replaceAll(value, 'console.log', `var outputDom = document.getElementById('output');outputDom.value = outputDom.value + '\\n' + '>>> ' + zztool.toString`);
+  
+  const str = replaceAll(value, 'console.log', `var outputDom = document.getElementById('output');outputDom.value = outputDom.value + '\\n' + '>>> ' + JSON.stringify`);
   eval(str);
 }
 </script>

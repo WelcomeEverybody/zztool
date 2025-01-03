@@ -40,6 +40,7 @@ export default [
         {name:"data.list.li9.name",title:"shuffleArray",com:"shuffleArray"},
         {name:"data.list.li10.name",title:"dataChangeIndex",com:"dataChangeIndex"},
         {name:"data.list.li11.name",title:'chunkArray',com:'chunkArray'},
+        {name:"data.list.li12.name",title:'getSameIndexValue',com:'getSameIndexValue'},
     ]},
     {name:'date.title',list:[
         {name:"date.list.li1.name",title:"getDateInfo",com:"getDateInfo"},
