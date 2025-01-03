@@ -55,20 +55,36 @@ GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
 ## 1.2.7
 
 
-| 增加              | col2 | col3 |
-| ----------------- | ---- | ---- |
-| getSameIndexValue |      |      |
-| getValue          |      |      |
+| 增加              | 优化        | col3 |
+| ----------------- | ----------- | ---- |
+| getSameIndexValue | getTimeStep |      |
+| getValue          | dataEqual   |      |
+
+#### dataEqual
+
+参数问题
+
+options.arrayDiff为true时则会对比相同索引的
+
+> **浅对比**
+>
+> 在 **浅对比** 模式下，数组的顺序不影响比较结果
+>
+> **深对比**
+>
+> 在 **深对比** 模式下，数组的顺序会影响比较结果
+
+因为参数options.arrayDiff为false时数组浅对比有问题，数据是数据对象并且顺序不一致时难以记录key，在此删除该参数强制开启深对比，优化浅对比逻辑
 
 ## 1.2.4
 
 
-| 增加            | 优化   |
-| --------------- | ------ |
-| dataChangeIndex | toTree |
-| sleep           |        |
-| chunkArray      |        |
-| chunkArrayItem  |        |
+| 增加            | 优化              |
+| --------------- | ----------------- |
+| dataChangeIndex | toTree            |
+| sleep           | getSameIndexValue |
+| chunkArray      |                   |
+| chunkArrayItem  |                   |
 
 #### toTree
 

@@ -188,10 +188,6 @@ export declare function deepClone(obj: any): any;
  */
 export declare function dataChangeIndex(data: object, index: string, newIndex: string): object;
 /**
- * 获取对象所有相同下标的值
- *
- */
-/**
  * 转树形结构
  * @param {*} data
  * @param {*} pid   父级id

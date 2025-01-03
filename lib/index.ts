@@ -3,7 +3,11 @@
  */
 "use strict";
 const version = "1.2.7";
-console.log("%czztool%c" + `V${version}`, "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px", "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px");
+console.log(
+  "%czztool%c" + `V${version}`,
+  "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
+  "background: #FFD700; color: #000000; border-radius: 0 3px 3px 0;padding:2px 5px"
+);
 /**
  * 插件公共方法
  */
@@ -14,7 +18,7 @@ export function replaceAll(
 ): string {
   return str.replace(new RegExp(target, "g"), replacement);
 }
-function isString(str:string){
+function isString(str: string) {
   if (typeof str !== "string") {
     error("参数类型错误，必须为字符串");
   }
@@ -45,7 +49,7 @@ export const debounce = (function () {
     timer && clearTimeout(timer);
     timer = setTimeout(callback, wait);
   };
-})()
+})();
 /**
  * 节流
  * @param callback 回调函数
@@ -60,7 +64,7 @@ export const throttle = (function () {
       last = now;
     }
   };
-})()
+})();
 /**
  * 获取类型
  * @param data
@@ -101,7 +105,7 @@ export function regPhone(str: string) {
  */
 export function regIdcard(str: string) {
   if (!/^\d{17}(\d|X)$/i.test(str)) return false;
-  
+
   const provinceCodes: any = {
     11: "北京",
     12: "天津",
@@ -171,7 +175,7 @@ export function regIdcard(str: string) {
  * @returns 第一个字符
  */
 export function getFirstChar(str: string) {
-  isString(str)
+  isString(str);
   return str.charAt(0);
 }
 /**
@@ -180,7 +184,7 @@ export function getFirstChar(str: string) {
  * @returns 最后一个字符
  */
 export function getLastChar(str: string) {
-  isString(str)
+  isString(str);
   return str.substring(str.length - 1, str.length);
 }
 /**
@@ -193,7 +197,7 @@ export function getLastChar(str: string) {
 export function getChar(str: string, start: number, end: number) {
   isString(str);
   const char = str.substring(start, end);
-  return char ? char : ""
+  return char ? char : "";
 }
 /**
  * 获取url参数
@@ -240,7 +244,7 @@ export function paramformat(obj: any, type = "url") {
  * @returns 字符串
  */
 export function toString(obj: any) {
-  if (!obj) error('该变量没有值');
+  if (!obj) error("该变量没有值");
   const chars = JSON.stringify(obj);
   if (getFirstChar(chars) === "\\") {
     return chars.replace(/\\/g, "");
@@ -371,11 +375,8 @@ export function dataEqual(
   obj2: any,
   options = {}
 ): boolean | Array<string> {
-  const defaultOptions = { returnKeys: false, arrayDiff: false };
-  const { returnKeys = false, arrayDiff = false } = Object.assign(
-    defaultOptions,
-    options
-  );
+  const defaultOptions = { returnKeys: false, arrayDiff: true };
+  const { returnKeys } = Object.assign(defaultOptions, options);
 
   const differingKeys: Array<string> = [];
   function isObject(value: any) {
@@ -388,21 +389,50 @@ export function dataEqual(
         data.forEach((k: any) => differingKeys.push(`${key}.${k}`));
       }
     } else if (Array.isArray(value1) && Array.isArray(value2)) {
-      const arraysDiffer = arrayDiff
-        ? value1.some((v, i) => v !== value2[i]) ||
-          value1.length !== value2.length
-        : value1.length !== value2.length ||
-          !value1.every((v) => value2.includes(v));
-      if (arraysDiffer) differingKeys.push(key);
+      // 深对比
+      value1.forEach((v, i) => {
+        if (typeof v == "object" && typeof value2[i] == "object") {
+          const data = dataEqual(v, value2[i], options);
+          if (Array.isArray(data)) {
+            data.forEach((k) => differingKeys.push(`${key}.${i}.${k}`));
+          }
+        } else if (v !== value2[i]) {
+          differingKeys.push(`${key}.${i}`);
+        }
+      });
+      // if (arrayDiff) {
+      // } 
+      // 浅对比 
+      // else {
+        // if (value1.length !== value2.length) {
+        //   differingKeys.push(key);
+        // } else {
+        //   const tempData1 = [...value1];
+        //   const tempData2 = [...value2];
+        //   const isEqual = tempData1.every((item1) => {
+        //     if (isObject(item1)) {
+        //       const index = tempData2.findIndex((item2) => isObject(item2) ? dataEqual(item1, item2, options) : false);
+        //       if (index === -1) return false;
+        //       tempData2.splice(index, 1);
+        //       return true;
+        //     } else {
+        //       const index = tempData2.indexOf(item1);
+        //       if (index === -1) return false;
+        //       tempData2.splice(index, 1);
+        //       return true;
+        //     }
+        //   });
+
+        //   if (!isEqual) differingKeys.push(key);
+        // }
+      // }
     } else if (value1 !== value2) {
       differingKeys.push(key);
     }
   };
   for (let key in obj1) {
     if (obj1.hasOwnProperty(key)) {
-      const value1 = obj1[key];
-      const value2 = obj2[key];
-      deepCompare(value1, value2, key);
+      deepCompare(obj1[key], obj2[key], key);
     }
   }
   return returnKeys ? differingKeys : differingKeys.length > 0;
@@ -456,26 +486,27 @@ export function dataEmpty(
 }
 /**
  * 获取对应索引的value
- * @param obj 
- * @param index 
- * @returns 
+ * @param obj
+ * @param index
+ * @returns
  */
-export function getSameIndexValue(obj: any, index: string,parentKey: string = ""): Array<{ key: string, value: any }> {
-  const arr: { key: string, value: any }[] = [];
+export function getSameIndexValue(
+  obj: any,
+  index: string,
+  parentKey: string = ""
+): Array<{ key: string; value: any }> {
+  const arr: { key: string; value: any }[] = [];
 
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
       const fullKey = parentKey ? `${parentKey}.${key}` : key;
       const value = obj[key];
-      if(typeof value === 'object'){
-        const nestedResult = getSameIndexValue(value,index,fullKey);
-        if (Array.isArray(nestedResult)) {
-          arr.push(...nestedResult);
-        }
-      }else if(key == index){
+      if (typeof value === "object") {
+        arr.push(...getSameIndexValue(value, index, fullKey));
+      } else if (key == index) {
         arr.push({
-          key:fullKey,
-          value
+          key: fullKey,
+          value,
         });
       }
     }
@@ -522,60 +553,42 @@ export function dataChangeIndex(
   newIndex: string
 ): object {
   if (typeof data !== "object" || data === null) return data;
-  const indexArr = toArray(index,',');
-  const newIndexArr = toArray(newIndex,',');
+  const indexArr = toArray(index, ",");
+  const newIndexArr = toArray(newIndex, ",");
   if (indexArr.length !== newIndexArr.length) {
     error("下表必须和新下标长度一致");
   }
-  for(let i = 0; i < indexArr.length; i++) {
-    hfn(data, indexArr[i], newIndexArr[i]);
-  }
-  function hfn(data: any, index: string, newIndex: string){
-    if (typeof data !== 'object' || data === null) return;
-    Object.keys(data).forEach(key => {
-      if (key === index) {
-        data[newIndex] = data[key];
-      }
-      if (typeof data[key] === 'object') {
-        hfn(data[key], index, newIndex);
-      }
+  indexArr.forEach((_item: any, i: any) =>
+    hfn(data, indexArr[i], newIndexArr[i])
+  );
+  function hfn(data: any, index: string, newIndex: string) {
+    if (typeof data !== "object" || data === null) return;
+    Object.keys(data).forEach((key) => {
+      if (key === index) data[newIndex] = data[key];
+      if (typeof data[key] === "object") hfn(data[key], index, newIndex);
     });
-    if(data.hasOwnProperty(index)){
-      delete data[index];
-    }
+    if (data.hasOwnProperty(index)) delete data[index];
   }
   return data;
 }
-/**
- * 获取对象所有相同下标的值
- * 
- */
-// export function getSameIndexValue(data: Object, index: string): Array<any> {
-//   const arr:any[] = [];
 
-//   function hfn(data: any, index: string){
-
-//   }
-//   return arr;
-// }
 /**
  * 转树形结构
  * @param {*} data
  * @param {*} pid   父级id
  */
 export function toTree(data: any[], pid: string) {
-  let tree:any = [];
-  let lookup:any = {};
+  let tree: any = [];
+  let lookup: any = {};
   data.forEach((item) => {
-      lookup[item.id] = Object.assign(Object.assign({}, item), { children: [] });
+    lookup[item.id] = Object.assign(Object.assign({}, item), { children: [] });
   });
   data.forEach((item) => {
-      if (item[pid] === null) {
-          tree.push(lookup[item.id]);
-      }
-      else {
-          lookup[item[pid]].children.push(lookup[item.id]);
-      }
+    if (item[pid] === null) {
+      tree.push(lookup[item.id]);
+    } else {
+      lookup[item[pid]].children.push(lookup[item.id]);
+    }
   });
   return tree;
 }
@@ -631,14 +644,14 @@ export function uniqueArray(data: any[]) {
  * @param data 数组
  * @param size 大小
  */
-export function chunkArray(data:any[],size:number):any[]{
-  if(size <= 1){
+export function chunkArray(data: any[], size: number): any[] {
+  if (size <= 1) {
     return [data];
   }
-  const result:any[] = [];
+  const result: any[] = [];
   const lng = Math.ceil(data.length / size);
-  for(let i = 0; i < size; i++){
-    result.push(data.slice(i * lng, (i + 1) * lng))
+  for (let i = 0; i < size; i++) {
+    result.push(data.slice(i * lng, (i + 1) * lng));
   }
   return result;
 }
@@ -648,8 +661,8 @@ export function chunkArray(data:any[],size:number):any[]{
  * @param arr 数组
  * @param size 大小
  */
-export function chunkArrayItem(arr:any[], size:number):any[] {
-  const result:any[] = [];
+export function chunkArrayItem(arr: any[], size: number): any[] {
+  const result: any[] = [];
   for (let i = 0; i < arr.length; i += size) {
     result.push(arr.slice(i, i + size));
   }
@@ -721,7 +734,7 @@ export function getDateInfo(str: any): {
  * @returns
  */
 export function getDateType(date: any, type = "Y/M/D h:m:s") {
-  if (typeof date == 'object') {
+  if (typeof date == "object") {
     var { year, month, day, hour, minute, second } = date;
   } else {
     var { year, month, day, hour, minute, second } = getDateInfo(date);
@@ -837,21 +850,19 @@ export function getYearWeeks(year: any = new Date().getFullYear()) {
  * @returns {Array}
  */
 export function getBetweenDate(date: any, date1: any, days: any = false) {
-  // 一天的时间戳
   const oneDay = 24 * 60 * 60 * 1000;
-  const dateTime = new Date(date).getTime();
-  const dateTime1 = new Date(date1).getTime();
-
+  const dateTime = getTimeStamp(date);
+  const dateTime1 = getTimeStamp(date1);
   if (days) {
     return Math.abs(dateTime - dateTime1) / oneDay;
   }
-  const list = [];
-  for (let i = 0; i <= Math.abs(dateTime - dateTime1) / oneDay; i++) {
-    const time =
-      dateTime > dateTime1 ? dateTime - i * oneDay : dateTime + i * oneDay;
-    list.push(getDate(new Date(time), "Y-M-D"));
-  }
-  return list;
+  return Array.from({ length: Math.abs(dateTime - dateTime1) / oneDay }).map(
+    (_, i) => {
+      const time =
+        dateTime > dateTime1 ? dateTime1 - i * oneDay : dateTime + i * oneDay;
+      return getDate(new Date(time), "Y-M-D");
+    }
+  );
 }
 /**
  * 获取某日期的近期天数
@@ -932,29 +943,23 @@ export function getTimeStep(
   step: any = "01:00",
   type: any = "hh:mm"
 ) {
-  const [startHour, startMinute, startSecond = 0] = start
-    .split(":")
-    .map(Number);
-  const [endHour, endMinute, endSecond = 0] = end.split(":").map(Number);
-  const [stepHour, stepMinute, stepSecond = 0] = step.split(":").map(Number);
+  const toSeconds = (time: string) =>
+    time
+      .split(":")
+      .map(Number)
+      .reduce((a, v, i) => a + v * [3600, 60, 1][i], 0);
+  const format = (time: number) =>
+    [Math.floor(time / 3600), Math.floor((time % 3600) / 60), time % 60]
+      .map((v) => String(v).padStart(2, "0"))
+      .join(":");
 
-  const startTime = startHour * 3600 + startMinute * 60 + startSecond;
-  const endTime = endHour * 3600 + endMinute * 60 + endSecond;
-  const stepTime = stepHour * 3600 + stepMinute * 60 + stepSecond;
+  const startTime = toSeconds(start);
+  const endTime = toSeconds(end);
+  const stepTime = toSeconds(step);
 
   const result = [];
   for (let time = startTime; time <= endTime; time += stepTime) {
-    const hour = String(Math.floor(time / 3600)).padStart(2, "0");
-    const minute = String(Math.floor((time % 3600) / 60)).padStart(2, "0");
-    const second = String(time % 60).padStart(2, "0");
-
-    if (type === "hh:mm:ss") {
-      result.push(`${hour}:${minute}:${second}`);
-    } else if (type === "hh:mm") {
-      result.push(`${hour}:${minute}`);
-    } else {
-      throw new Error(`Unsupported type: ${type}`);
-    }
+    result.push(type === "hh:mm:ss" ? format(time) : format(time).slice(0, 5));
   }
 
   return result;
@@ -966,7 +971,9 @@ export function getTimeStep(
  * @returns
  */
 export function getTimeStamp(date: any = new Date(), mill = true) {
-  return mill ? new Date(date).getTime() : Math.floor(new Date(date).getTime() / 1000);
+  return mill
+    ? new Date(date).getTime()
+    : Math.floor(new Date(date).getTime() / 1000);
 }
 /**
  * 计算百分比
@@ -988,19 +995,19 @@ export function sleep(ms: number) {
 
 /**
  * 获取索引值
- * 仅适用于 对象嵌套 
+ * 仅适用于 对象嵌套
  * 'xxx.xxx.xxx' 形式
  * [xxx,xxx,xxx] 形式
- * @param obj 
- * @param path 
- * @returns 
+ * @param obj
+ * @param path
+ * @returns
  */
-export function getValue(obj:any, path:any){
-  if(typeof path === 'string' && regIsHas(path, '.')){
-    path = path.split('.');
+export function getValue(obj: any, path: any) {
+  if (typeof path === "string" && regIsHas(path, ".")) {
+    path = path.split(".");
   }
-  if(!Array.isArray(path) || !path){
-    return '';
+  if (!Array.isArray(path) || !path) {
+    return "";
   }
-  return path.reduce((acc:any, key:any) => acc && acc[key], obj);
-};
+  return path.reduce((acc: any, key: any) => acc && acc[key], obj);
+}
