@@ -897,7 +897,7 @@ export function getRecentDate(
   const generateDateList = (count: number) =>
     Array.from({ length: count }, (_, i) => {
       const time = now - (count - i - 1) * oneDay;
-      return getDateType(new Date(time), format);
+      return getDateType(getDateInfo(new Date(time)), format);
     });
 
   // start

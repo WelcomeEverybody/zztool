@@ -52,6 +52,14 @@ GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
 
 # 更新日志
 
+## 1.2.8
+
+
+| 优化          | col2 | col3 |
+| ------------- | ---- | ---- |
+| getRecentDate |      |      |
+|               |      |      |
+
 ## 1.2.7
 
 
