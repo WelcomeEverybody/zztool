@@ -31,6 +31,13 @@ const count = ref(0)
     >.
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <img
+    alt="Vue logo"
+    class="logo"
+    src="https://vuejs.org/images/logo.png"
+    width="125"
+    height="125"
+  />
 </template>
 
 <style scoped>
