@@ -54,19 +54,17 @@ GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
 
 ## 1.2.8
 
-
-| 优化          | col2 | col3 |
-| ------------- | ---- | ---- |
-| getRecentDate |      |      |
-|               |      |      |
+| 优化          |
+| ------------- |
+| getRecentDate |
+| strReplace    |
 
 ## 1.2.7
 
-
-| 增加              | 优化        | col3 |
-| ----------------- | ----------- | ---- |
-| getSameIndexValue | getTimeStep |      |
-| getValue          | dataEqual   |      |
+| 增加              | 优化        |
+| ----------------- | ----------- |
+| getSameIndexValue | getTimeStep |
+| getValue          | dataEqual   |
 
 #### dataEqual
 
@@ -75,17 +73,16 @@ GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
 options.arrayDiff为true时则会对比相同索引的
 
 > **浅对比**
->
+> 
 > 在 **浅对比** 模式下，数组的顺序不影响比较结果
->
+> 
 > **深对比**
->
+> 
 > 在 **深对比** 模式下，数组的顺序会影响比较结果
 
 因为参数options.arrayDiff为false时数组浅对比有问题，数据是数据对象并且顺序不一致时难以记录key，在此删除该参数强制开启深对比。
 
 ## 1.2.4
-
 
 | 增加            | 优化              |
 | --------------- | ----------------- |
@@ -100,7 +97,6 @@ options.arrayDiff为true时则会对比相同索引的
 
 ## 1.2.1
 
-
 | 删除           | 增加         |
 | -------------- | ------------ |
 | dataFindValues | getTimeStamp |
@@ -109,7 +105,6 @@ options.arrayDiff为true时则会对比相同索引的
 2. 删除isNumber,isNaN等方法
 
 ## 1.1.5
-
 
 | 增加            | 优化        |
 | --------------- | ----------- |
@@ -128,7 +123,6 @@ options.arrayDiff为true时则会对比相同索引的
 
 ## 1.1.4
 
-
 | 增加                | 优化           |
 | ------------------- | -------------- |
 | calculatePercentage | getUrlParam    |
@@ -136,7 +130,6 @@ options.arrayDiff为true时则会对比相同索引的
 |                     | getBetweenDate |
 
 ## 1.1.3
-
 
 | 优化      |
 | --------- |
@@ -147,13 +140,11 @@ options.arrayDiff为true时则会对比相同索引的
 
 增加[文档](https://czhangzihao.github.io/zztool/)
 
-
 | 修复        |
 | ----------- |
 | getDateList |
 
 ## 1.1.1
-
 
 | 增加           |
 | -------------- |
@@ -163,13 +154,11 @@ options.arrayDiff为true时则会对比相同索引的
 
 ## 1.1.0
 
-
 | 修复      |
 | --------- |
 | regIdcard |
 
 ## 1.0.8
-
 
 | 优化        | 增加             |
 | ----------- | ---------------- |
@@ -180,9 +169,9 @@ options.arrayDiff为true时则会对比相同索引的
 
 ## 1.0.7
 
-
 | 优化        | 增加        |
 | ----------- | ----------- |
 | toBoolean   | getUrlParam |
 | toArray     | paramFormat |
 | getDateType | getWeekTime |
+

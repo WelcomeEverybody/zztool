@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "1.2.7";
+const version = "1.2.9";
 console.log(
   "%czztool%c" + `V${version}`,
   "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
@@ -186,6 +186,24 @@ export function getFirstChar(str: string) {
 export function getLastChar(str: string) {
   isString(str);
   return str.substring(str.length - 1, str.length);
+}
+/**
+ * 字符串替换
+ * @param str 字符串
+ * @param start 开始位置
+ * @param end 结束位置
+ * @param icon 替换字符
+ * @returns 替换后的字符串
+ */
+export function strReplace(str:string, start:number, end:number,icon='*') {
+  let len = str.length;
+  let s = str.substring(0, start);
+  let e = str.substring(end, len);
+  let star = '';
+  for (let i = 0; i < end - start; i++) {
+    star += icon;
+  }
+  return s + star + e;
 }
 /**
  * 获取字符
@@ -678,7 +696,7 @@ export function dataFind(data: any, key: any, value: any) {
   const find = (data: any) => {
     for (const itemkey in data) {
       if (itemkey === key && data[itemkey] === value) {
-        return { key: itemkey, value: data[itemkey] };
+        return data;
       } else if (
         Array.isArray(data[itemkey]) ||
         typeof data[itemkey] === "object"

@@ -27,8 +27,10 @@ function __VLS_template() {
     __VLS_elementAsFunction(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)({});
     __VLS_elementAsFunction(__VLS_intrinsicElements.a, __VLS_intrinsicElements.a)({ href: ("https://vuejs.org/guide/scaling-up/tooling.html#ide-support"), target: ("_blank"), });
     __VLS_elementAsFunction(__VLS_intrinsicElements.p, __VLS_intrinsicElements.p)(Object.assign({ class: ("read-the-docs") }));
+    __VLS_elementAsFunction(__VLS_intrinsicElements.img)(Object.assign(Object.assign({ alt: ("Vue logo") }, { class: ("logo") }), { src: ("https://vuejs.org/images/logo.png"), width: ("125"), height: ("125") }));
     __VLS_styleScopedClasses['card'];
     __VLS_styleScopedClasses['read-the-docs'];
+    __VLS_styleScopedClasses['logo'];
     var __VLS_slots;
     var __VLS_inheritedAttrs;
     const __VLS_refs = {};
