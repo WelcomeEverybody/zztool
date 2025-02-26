@@ -1,20 +1,9 @@
-import * as tool from "../lib/index.js";
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
+// import { onMounted, ref } from 'vue';
+// import * as tool from "../lib/index.js";
 // import HelloWorld from "./components/HelloWorld.vue";
 // const arr = tool.dataEqual(obj1, obj2, { returnKeys: true})
-const obj = {
-    a: 1,
-    b: 2,
-    obj: {
-        c: 3,
-        d: 4,
-        obj: {
-            e: 5,
-            key: 6,
-        },
-    },
-};
-console.log(tool.dataFind(obj, 'key', 6));
+// console.log(tool.getTimeStep('08:00', '24:00','00:15','ss:hh:mm'));
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
@@ -27,6 +16,12 @@ function __VLS_template() {
     let __VLS_styleScopedClasses;
     let __VLS_resolvedLocalAndGlobalComponents;
     __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({});
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({ id: ("time"), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.canvas, __VLS_intrinsicElements.canvas)({ id: ("container"), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.select, __VLS_intrinsicElements.select)({ name: (""), id: ("select"), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.option, __VLS_intrinsicElements.option)({ value: ("S"), selected: (true), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.option, __VLS_intrinsicElements.option)({ value: ("M"), });
+    __VLS_elementAsFunction(__VLS_intrinsicElements.option, __VLS_intrinsicElements.option)({ value: ("L"), });
     var __VLS_slots;
     var __VLS_inheritedAttrs;
     const __VLS_refs = {};
